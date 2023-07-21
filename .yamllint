@@ -1,0 +1,94 @@
+---
+yaml-files:
+  - "*.yaml"
+  - "*.yml"
+  - ".yamllint"
+
+rules:
+  ## enforced rules - breaking these rules will fail linting
+  ## refer to https://yamllint.readthedocs.io/en/stable/rules.html# for more details
+  # 0 spaces before colons and 1 space after
+  colons:
+    level: error
+    max-spaces-before: 0
+    max-spaces-after: 1
+  # 0 spaces before commas and 1 space after
+  commas:
+    level: error
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+  # requires 1 space after `#` and 1 space from content to `#`
+  comments:
+    level: error
+    require-starting-space: true
+    ignore-shebangs: true
+    min-spaces-from-content: 1
+  # yaml documents should always start with `---`
+  document-start:
+    level: error
+    present: true
+  # no empty lines at the beginning of the file, maximum 1 empty line at the end of file
+  empty-lines:
+    level: error
+    max: 1
+    max-start: 0
+    max-end: 1
+  # maximum 1 space after `-`
+  hyphens:
+    level: error
+    max-spaces-after: 1
+  # indentation with 2 spaces
+  # indentation should be consistent
+  # multi-line strings should be indented
+  indentation:
+    level: error
+    spaces: 2
+    indent-sequences: consistent
+    check-multi-line-strings: true
+  # no duplicate keys
+  key-duplicates: enable
+  # 1 new line at end of file
+  new-line-at-end-of-file: enable
+  # no trailing spaces
+  trailing-spaces: enable
+  ####################
+  # warning only rules
+  # `{}` can have 1 space inside e.g. `{ allow: space }` or `{allow: space}`
+  braces:
+    level: warning
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  # `[]` can have 1 space inside e.g. `[ allow: space ]` or `[allow: space]`
+  # empty brackets should not have spaces inside `[]`
+  brackets:
+    level: warning
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+    min-spaces-inside-empty: 0
+    max-spaces-inside-empty: 0
+  # comments should be indented
+  comments-indentation:
+    level: warning
+  # `...` is not required as document-end
+  document-end:
+    level: warning
+    present: false
+  # empty values should not be present
+  empty-values:
+    level: warning
+    forbid-in-block-mappings: true
+    forbid-in-flow-mappings: true
+  # booleans should be `true` or `false`
+  truthy:
+    level: warning
+  ################
+  # disabled rules
+  # alphabetical ordering of keys in mappings
+  key-ordering: disable
+  # set a limit to lines length
+  line-length: disable
+  # force the type of new line characters
+  new-lines: disable
+  # prevent values with octal numbers
+  octal-values: disable
