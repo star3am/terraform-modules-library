@@ -66,6 +66,11 @@ __Folder contains a Dev Container configuration file. Reopen folder to develop i
 
 You will see the Docker Build log bottom right and once done, you will see the files of the project in VSCode.
 
+![VSCode open repository folder open in
+devcontainer docker build log](images/images/vscode-open-repository-folder-open-in-devcontainer-build-log.png?raw=true
+"VSCode open repository folder open in
+devcontainer docker build log")
+
 Now you can open a new Terminal. This will launch a new terminal inside the container, you will note that Terraform, Terragrunt and all the tools this project needs has already been installed for you.
 
 ![VSCode open repository folder open in devcontainer new Terminal](images/vscode-open-repository-folder-open-in-devcontainer-new-terminal.png?raw=true "VSCode open repository folder open in devcontainer new Terminal")
@@ -478,6 +483,8 @@ I try to avoid code duplication and as a small team, to avoid this developers co
 ## Gotchas
 
 - You will see in the terragrunt.hcl files where I detect the module source I post-fix it with `//.` see this bug: https://github.com/gruntwork-io/terragrunt/issues/1675
+
+- fatal: detected dubious ownership in repository at '/app' To add an exception for this directory see this page: https://www.kenmuse.com/blog/avoiding-dubious-ownership-in-dev-containers/
 
 ## Thanks!
 

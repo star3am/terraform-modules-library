@@ -39,6 +39,7 @@ unzip \
 zip \
 nano \
 vim \
+less \
 "
 
 # Env vars
