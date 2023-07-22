@@ -66,8 +66,8 @@ __Folder contains a Dev Container configuration file. Reopen folder to develop i
 
 You will see the Docker Build log bottom right and once done, you will see the files of the project in VSCode.
 
-![VSCode open repository folder open in devcontainer docker build 
-log](images/vscode-open-repository-folder-open-in-devcontainer-build-log.png?raw=true "VSCode open repository folder open in 
+![VSCode open repository folder open in devcontainer docker build
+log](images/vscode-open-repository-folder-open-in-devcontainer-build-log.png?raw=true "VSCode open repository folder open in
 devcontainer docker build log")
 
 Now you can open a new Terminal. This will launch a new terminal inside the container, you will note that Terraform, Terragrunt and all the tools this project needs has already been installed for you.
