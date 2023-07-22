@@ -50,10 +50,27 @@ Please install the following software
 
 - Docker Desktop https://www.docker.com/products/docker-desktop/
 - Visual Studio Code https://code.visualstudio.com/download (with Remote development in Containers extension) https://code.visualstudio.com/docs/remote/containers-tutorial
+- Clone this repository
+- Now Open VSCode and Open this repository
 
-## Gotchas
+:bulb: Let's look at some Screenshots of Opening your project
 
-- You will see in the terragrunt.hcl files where I detect the module source I post-fix it with `//.` see this bug: https://github.com/gruntwork-io/terragrunt/issues/1675
+In VSCode, click File -> Open Folder and navigate to this project
+![VSCode open repository folder](images/vscode-open-repository-folder.png?raw=true "VSCode open repository folder")
+
+If you have installed the Devcontainer Extension in the previous step, you'd see a Notification, bottom Right.
+
+__Folder contains a Dev Container configuration file. Reopen folder to develop in a container__ and click `Reopen in Container`
+
+![VSCode open repository folder open in devcontainer](images/vscode-open-repository-folder-open-in-devcontainer.png?raw=true "VSCode open repository folder open in devcontainer")
+
+You will see the Docker Build log bottom right and once done, you will see the files of the project in VSCode.
+
+Now you can open a new Terminal. This will launch a new terminal inside the container, you will note that Terraform, Terragrunt and all the tools this project needs has already been installed for you.
+
+![VSCode open repository folder open in devcontainer new Terminal](images/vscode-open-repository-folder-open-in-devcontainer-new-terminal.png?raw=true "VSCode open repository folder open in devcontainer new Terminal")
+
+Now you need to Authenticate to your Clouds, see: __Authenticating__ below.
 
 ## Authenticating
 
@@ -457,6 +474,10 @@ At some stage of the game you will need to debug something, this setup, automate
 
 - Why are You using a Mono Repo?
 I try to avoid code duplication and as a small team, to avoid this developers commit hell cycle, I opted for a Mono repo, you are welcome to split it up. You can always use teh individual modules using the Terraform Source `source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/debug?ref=main"`
+
+## Gotchas
+
+- You will see in the terragrunt.hcl files where I detect the module source I post-fix it with `//.` see this bug: https://github.com/gruntwork-io/terragrunt/issues/1675
 
 ## Thanks!
 

@@ -22,3 +22,5 @@ inputs = merge(
   { module_name   = local.module_name },
   { module_written_for_cloud = local.module_written_for_cloud }
 )
+
+skip = true
