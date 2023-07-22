@@ -24,7 +24,10 @@ This repository uses some best practice tools to help us with our modules. Tools
 | AWS | ✓ |
 | GCP | ✓ |
 | Azure | ✓ |
-| TFEnv | ✓ |
+| Custom | ✓ |
+| Terraform Lint | ✓ |
+| Terraform Format | ✓ |
+| Terraform Validate | ✓ |
 | Terraform Docs | ✓ |
 
 - Pre-commit: Runs pre-commit with the given config in `.pre-commit-config.yaml.
@@ -156,7 +159,7 @@ Group 1
 - Module /app/azure/modules/resource-group
 - Module /app/custom/modules/debug
 - Module /app/gcp/modules/debug
- 
+
 
 Initializing the backend...
 
@@ -454,3 +457,7 @@ At some stage of the game you will need to debug something, this setup, automate
 
 - Why are You using a Mono Repo?
 I try to avoid code duplication and as a small team, to avoid this developers commit hell cycle, I opted for a Mono repo, you are welcome to split it up. You can always use teh individual modules using the Terraform Source `source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/debug?ref=main"`
+
+## Thanks!
+
+Many thanks goes to the team at Gruntwork https://gruntwork.io/ for their amazing effort and for selflessly sharing their code in the great spirit of Open Source. In fact https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example inspired this repo and set the foundation for this repo.

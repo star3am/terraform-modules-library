@@ -30,7 +30,7 @@ help:
 
 .PHONY: debug
 debug:
-	for module in $$MODULES; do \
+	for module in $(MODULES); do \
 		echo $$module && make tflint-module MODULE=$$module; \
 	done
 
@@ -73,7 +73,8 @@ tflint-module: module-vars
 .PHONY: validate
 validate: ## Validate all terraform modules
 	$(info --- validate)
-	@for module in $(MODULE); do \
+	@for module in $(MODULES); do \
+		echo Running terraform validate on $$module; \
 		cd $$module; \
 		terraform validate; \
 		cd ../../../; \

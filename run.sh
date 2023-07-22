@@ -14,6 +14,9 @@ make tflint
 echo "make format"
 make format
 
+echo "make validate"
+make validate
+
 echo "make clean"
 make clean
 
