@@ -101,25 +101,6 @@ When you run ./run.sh you will get the following output
 
 ```
 Similate Pipeline
-pre-commit run -a
-check for added large files..............................................Passed
-check for merge conflicts................................................Passed
-check vcs permalinks.....................................................Passed
-forbid new submodules................................(no files to check)Skipped
-don't commit to branch...................................................Passed
-fix end of files.........................................................Passed
-trim trailing whitespace.................................................Passed
-check yaml...............................................................Passed
-check for merge conflicts................................................Passed
-check for broken symlinks............................(no files to check)Skipped
-check json...............................................................Passed
-check for case conflicts.................................................Passed
-mixed line ending........................................................Passed
-detect aws credentials...................................................Passed
-detect private key.......................................................Passed
-Terraform fmt............................................................Passed
-Terraform docs...........................................................Passed
-Lint Dockerfiles.........................................................Passed
 make lint
 --- terraform-lint
 >>> Exec (terraform fmt -check -recursive -diff)
@@ -484,6 +465,10 @@ I try to avoid code duplication and as a small team, to avoid this developers co
 - You will see in the terragrunt.hcl files where I detect the module source I post-fix it with `//.` see this bug: https://github.com/gruntwork-io/terragrunt/issues/1675
 
 - fatal: detected dubious ownership in repository at '/app' To add an exception for this directory see this page: https://www.kenmuse.com/blog/avoiding-dubious-ownership-in-dev-containers/
+
+- I've nto found a way to force no-cache so sometimes you need to say ReBuild and ReOpen in Container.
+
+![VSCode ReBuild and ReOpen in Container](images/remote-command-palette.png?raw=true "VSCode ReBuild and ReOpen in Container")
 
 ## Thanks!
 
