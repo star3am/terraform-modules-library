@@ -2,9 +2,6 @@
 
 echo "Similate Pipeline"
 
-echo "pre-commit run -a"
-pre-commit run -a
-
 echo "make lint"
 make lint
 
