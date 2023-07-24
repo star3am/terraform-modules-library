@@ -4,13 +4,16 @@ This repository forms the basis of my own personal implimentation of a Terraform
 
 It's made up of pre-coded modules to get you started quickly.
 
+It also uses tools, such as TFEnv, Terraform Docs, Linters, VSCode's Dev / Remote containers and many more to provide effectively a Terraform / DevOps engineer development lab to develop and test Terraform Modules. 
+
 You are most welcome and in fact encouraged to contribute back to this repository.
 
 ![Terraform Modules Library](images/009-owl.png?raw=true "Terraform Modules Library")
 
 ## Demo
 
-A quick video walk through demo
+A quick video walk through demo of this solution
+
 ![Terraform Modules Library](images/demo.gif?raw=true "Terraform Modules Library")
 
 ## Features
