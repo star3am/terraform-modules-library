@@ -4,7 +4,7 @@ This repository forms the basis of my own personal implimentation of a Terraform
 
 It's made up of pre-coded modules to get you started quickly.
 
-It also uses tools, such as TFEnv, Terraform Docs, Linters, VSCode's Dev / Remote containers and many more to provide effectively a Terraform / DevOps engineer development lab to develop and test Terraform Modules. 
+It also uses tools, such as TFEnv, Terraform Docs, Linters, VSCode's Dev / Remote containers and many more to provide effectively a Terraform / DevOps engineer development lab to develop and test Terraform Modules.
 
 You are most welcome and in fact encouraged to contribute back to this repository.
 
@@ -29,6 +29,7 @@ This repository uses some best practice tools to help us with our modules. Tools
 | Terragrunt | ✓ |
 | TFEnv | ✓ |
 | TGEnv | ✓ |
+| TFsec | ✓ |
 | AWS | ✓ |
 | GCP | ✓ |
 | Azure | ✓ |

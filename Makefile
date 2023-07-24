@@ -80,6 +80,16 @@ validate: ## Validate all terraform modules
 		cd ../../../; \
 	done
 
+.PHONY: tfsec
+tfsec: ## TFSec all terraform modules
+	$(info --- tfsec)
+	@for module in $(MODULES); do \
+		echo Running tfsec on $$module; \
+		cd $$module; \
+		tfsec ./; \
+		cd ../../../; \
+	done
+
 .PHONY: clean
 clean: ## Remove the .terragrunt-cache directories
 	$(info --- clean)

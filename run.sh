@@ -23,6 +23,9 @@ make clean
 echo "make docs"
 make docs
 
+echo "make tfsec"
+make tfsec
+
 echo "make plan-all"
 make plan-all
 
