@@ -11,10 +11,13 @@ services:
     # image: tools-${ARCH}:latest
     network_mode: "bridge"
     volumes:
+      # Mounts the project folder into the container
       - ".:/app"
-    #   - "~/.ssh:/home/ubuntu/.ssh"
-    # Add your .aws or .azure or .kube directories here
-    # - "$AZURE_CONFIG_DIR:/home/ubuntu/.azure"
+      # Mount your ~/.ssh folder into the container
+      # for Authenticating to Github
+      - "~/.ssh:/home/ubuntu/.ssh"
+      # Add your .aws or .azure or .kube directories here
+      # - "$AZURE_CONFIG_DIR:/home/ubuntu/.azure"
     working_dir: "/app"
     environment:
       - ARCH

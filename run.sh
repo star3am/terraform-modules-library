@@ -2,14 +2,17 @@
 
 echo "Similate Pipeline"
 
+echo "make format"
+make format
+
 echo "make lint"
 make lint
 
 echo "make tflint"
 make tflint
 
-echo "make format"
-make format
+echo "make init-all"
+make init-all
 
 echo "make validate"
 make validate

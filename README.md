@@ -8,6 +8,11 @@ You are most welcome and in fact encouraged to contribute back to this repositor
 
 ![Terraform Modules Library](images/009-owl.png?raw=true "Terraform Modules Library")
 
+## Demo
+
+A quick video walk through demo
+![Terraform Modules Library](images/demo.gif?raw=true "Terraform Modules Library")
+
 ## Features
 
 This repository uses some best practice tools to help us with our modules. Tools such as TFENV which automatically installs the correct Terraform Version, Terraform Docs and Terraform Lint, the comprehensive feature list is detailed below.
