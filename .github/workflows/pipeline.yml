@@ -1,0 +1,27 @@
+# https://docs.github.com/en/actions/quickstart
+# hhttps://github.com/marketplace/actions/build-and-publish-docker-image-to-github-container-registry
+name: "Terraform Modules Library Pipeline"
+
+on:
+  push:
+
+# env:
+#   TF_CLOUD_ORGANIZATION: "nolan"
+#   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+#   TF_WORKSPACE: "terraform-hashicorp-hashiqube"
+#   CONFIG_DIRECTORY: "./"
+
+jobs:
+  build-and-publish-latest:
+    runs-on: ubuntu-latest
+    # if: github.ref == 'refs/heads/main' # Running this job only for master branch
+
+    steps:
+        - uses: actions/checkout@v2 # Checking out the repo
+
+        - name: Build and Publish latest Docker image
+          uses: VaultVulp/gp-docker-action@1.6.0
+          with:
+              github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+              image-name: container # Provide only Docker image name, tag will be automatically set to latest
+              dockerfile: Dockerfile
