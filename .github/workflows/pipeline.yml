@@ -14,14 +14,32 @@ on:
 jobs:
   build-and-publish-latest:
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/main' # Running this job only for master branch
+    # Running this job only for master branch
+    # if: github.ref == 'refs/heads/main'
 
     steps:
-        - uses: actions/checkout@v2 # Checking out the repo
+      # Checking out the repo
+      - uses: actions/checkout@v2
 
-        - name: Build and Publish latest Docker image
-          uses: VaultVulp/gp-docker-action@1.6.0
-          with:
-              github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-              image-name: container # Provide only Docker image name, tag will be automatically set to latest
-              dockerfile: Dockerfile
+      # https://github.com/docker/setup-qemu-action
+      # https://blog.thesparktree.com/docker-multi-arch-github-actions
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: 'arm64,amd64'
+
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # https://github.com/marketplace/actions/docker-build-push-action
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build and Push Docker image
+        with:
+          image: terraform-modules-library-container
+          tags: latest
+          registry: ghcr.io
+          multiPlatform: true
+          platform: linux/amd64,linux/arm64
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
