@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-echo "Similate Pipeline"
+echo "Simulate Pipeline"
 
 echo "make format"
 make format
