@@ -117,20 +117,20 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then ARCHITECTURE=amd64; elif [ "$
     chmod +x terraform-docs && \
     mv terraform-docs /usr/local/bin/terraform-docs
 
+# aws cli https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+# https://aws.amazon.com/blogs/developer/aws-cli-v2-now-available-for-linux-arm/
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then ARCHITECTURE=x86_64; elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then ARCHITECTURE=aarch64; elif [ "$TARGETPLATFORM" = "linux/arm64/v8" ]; then ARCHITECTURE=aarch64; elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE=aarch64; else ARCHITECTURE=x86_64; fi && \
+    curl -Lo "/tmp/awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-${ARCHITECTURE}.zip" && \
+    cd /tmp && \
+    unzip -qq awscliv2.zip && \
+    ./aws/install --update
+
+# gcloud cli https://cloud.google.com/sdk/docs/install#deb
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
+
 # # terraform plugin-cache
 # RUN mkdir -p /home/ubuntu/.terraform.d/plugin-cache && \
 #     chown -R ubuntu:ubuntu /home/ubuntu/.terraform.d
-
-# docker https://github.com/docker/docker-install
-RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
-    sh get-docker.sh && \
-    usermod -aG docker ubuntu
-
-# docker-compose https://docs.docker.com/compose/install/linux/#install-the-plugin-manually
-ARG DOCKERCOMPOSE_VERSION="2.11.2"
-RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then ARCHITECTURE=x86_64; elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then ARCHITECTURE=aarch64; elif [ "$TARGETPLATFORM" = "linux/arm/v8" ]; then ARCHITECTURE=aarch64; elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE=aarch64; else ARCHITECTURE=x86_64; fi && \
-    curl -Lo /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/v${DOCKERCOMPOSE_VERSION}/docker-compose-linux-${ARCHITECTURE} && \
-    chmod +x /usr/local/bin/docker-compose
 
 # cleanup
 RUN apt autoremove --purge -y && \
@@ -142,6 +142,10 @@ RUN apt autoremove --purge -y && \
 
 USER ubuntu
 ENV PATH="$PATH:/home/ubuntu/.local/bin"
+
+# azure cli
+# BUG: https://github.com/Azure/azure-cli/issues/7368 so installing via pip
+RUN python3 -m pip install --no-cache-dir --quiet --upgrade azure-cli
 
 # pre-commit https://pre-commit.com/#install
 RUN python3 -m pip install --no-cache-dir --quiet --upgrade --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org git+https://github.com/pre-commit/pre-commit.git@v2.20.0
