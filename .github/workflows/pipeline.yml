@@ -14,7 +14,7 @@ on:
 
 jobs:
   build-and-publish-latest:
-    # if: ${{ github.event.label.name == 'rebuild container image' }}
+    if: contains( github.event.pull_request.labels.*.name, 'rebuild container image')
     runs-on: ubuntu-latest
     # Running this job only for master branch
     # if: github.ref == 'refs/heads/main'
@@ -47,6 +47,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
   run-run-dot-sh:
+    needs: build-and-publish-latest
+    if: |
+      always() &&
+      (needs.build-and-publish-latest.result == 'success' || needs.build-and-publish-latest.result == 'skipped')
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
@@ -55,6 +59,9 @@ jobs:
     steps:
       # Checking out the repo
       - uses: actions/checkout@v3
+
+      - name: Env variables
+        run: env | sort -V
 
       - name: Terraform version
         run: terraform -v
