@@ -467,7 +467,7 @@ At some stage of the game you will need to debug something, this setup, automate
 ## FAQs
 
 - Why are You using a Mono Repo?
-I try to avoid code duplication and as a small team, to avoid this developers commit hell cycle, I opted for a Mono repo, you are welcome to split it up. You can always use teh individual modules using the Terraform Source `source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/debug?ref=main"`
+I try to avoid code duplication and as a small team, to avoid this developers commit hell cycle, I opted for a Mono repo, you are welcome to split it up. You can always use the individual modules using the Terraform Source `source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/debug?ref=main"`
 
 ## Gotchas
 
@@ -475,7 +475,7 @@ I try to avoid code duplication and as a small team, to avoid this developers co
 
 - fatal: detected dubious ownership in repository at '/app' To add an exception for this directory see this page: https://www.kenmuse.com/blog/avoiding-dubious-ownership-in-dev-containers/
 
-- I've nto found a way to force no-cache so sometimes you need to say ReBuild and ReOpen in Container.
+- I've not found a way to force no-cache so sometimes you need to say ReBuild and ReOpen in Container.
 
 ![VSCode ReBuild and ReOpen in Container](images/remote-command-palette.png?raw=true "VSCode ReBuild and ReOpen in Container")
 

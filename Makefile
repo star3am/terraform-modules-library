@@ -60,6 +60,7 @@ yamllint:
 .PHONY: tflint
 tflint:
 	$(info --- tflint)
+	@tflint --init
 	@for module in $(MODULES); do \
 		$(MAKE) --no-print-directory tflint-module MODULE=$$module; \
 	done

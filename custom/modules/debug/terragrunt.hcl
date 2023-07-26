@@ -13,7 +13,7 @@ locals {
   module_folder    = "${get_parent_terragrunt_dir()}"
   module_name      = basename(get_terragrunt_dir()) # Use the module with the same name as the terragrunt folder name
 
-  module_written_for_cloud = element(split("/", get_parent_terragrunt_dir()), 2)
+  module_written_for_cloud = element(reverse(split("/", get_parent_terragrunt_dir())), 2)
   path_relative_to_include = path_relative_to_include()
 }
 
