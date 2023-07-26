@@ -49,7 +49,7 @@ jobs:
   run-run-dot-sh:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/versent/terraform-modules-library-container:latest
+      image: terraform-modules-library-container:latest
       options: --user 1001
 
     steps:
