@@ -14,7 +14,7 @@ on:
 
 jobs:
   build-and-publish-latest:
-    if: ${{ github.event.label.name == 'rebuild container image' }}
+    # if: ${{ github.event.label.name == 'rebuild container image' }}
     runs-on: ubuntu-latest
     # Running this job only for master branch
     # if: github.ref == 'refs/heads/main'
@@ -49,7 +49,7 @@ jobs:
   run-run-dot-sh:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/versent/terraform-modules-library-container:latest
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
       options: --user 1001
 
     steps:
