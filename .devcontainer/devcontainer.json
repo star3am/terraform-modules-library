@@ -2,7 +2,12 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "tools",
   "workspaceFolder": "/app",
-  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "postStartCommand": {
+    "set-git-config-safe-directory": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "set-git-config-line-endings": "git config --global core.autocrlf input",
+    "set-git-config-gpg-program": "git config --global --add gpg.program /usr/bin/gpg",
+    "add-run-dot-sh-to-path": "ln -s ${containerWorkspaceFolder}/run.sh ~/.local/bin/run.sh"
+  },
   "customizations": {
     "vscode": {
       "extensions": [

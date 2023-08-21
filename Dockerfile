@@ -40,6 +40,7 @@ zip \
 nano \
 vim \
 less \
+dos2unix \
 "
 
 # Env vars
@@ -73,6 +74,7 @@ RUN git clone --depth 1 https://github.com/tfutils/tfenv.git /opt/tfenv && \
     ln -s /opt/tfenv/bin/terraform /usr/local/bin && \
     mkdir -p /opt/tfenv/versions && \
     cd /opt && \
+    dos2unix /opt/.terraform-version && \
     tfenv install && \
     chown -R ubuntu:root /opt/tfenv
 
@@ -83,6 +85,7 @@ RUN git clone --depth 1 https://github.com/cunymatthieu/tgenv.git /opt/tgenv && 
     ln -s /opt/tgenv/bin/terragrunt /usr/local/bin && \
     mkdir -p /opt/tgenv/versions && \
     cd /opt/tgenv && \
+    dos2unix /opt/.terragrunt-version && \
     if [ "$TARGETPLATFORM" = "linux/amd64" ]; then TGENV_ARCH=amd64; elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then TGENV_ARCH=arm64; elif [ "$TARGETPLATFORM" = "linux/arm64/v8" ]; then TGENV_ARCH=arm64; elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then TGENV_ARCH=arm64; else TGENV_ARCH=amd64; fi && \
     TGENV_ARCH=${TGENV_ARCH} tgenv install && \
     chown -R ubuntu:root /opt/tgenv
