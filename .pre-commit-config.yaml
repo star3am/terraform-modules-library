@@ -12,6 +12,7 @@ repos:
       - id: check-vcs-permalinks
       - id: forbid-new-submodules
       - id: no-commit-to-branch
+        args: ['--branch', 'main']
       # Common errors
       - id: end-of-file-fixer
       - id: trailing-whitespace
