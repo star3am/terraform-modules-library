@@ -15,7 +15,9 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   build-and-publish-latest:
-    if: ${{ github.event.label.name == 'rebuild container image' }}
+    if: |
+      always() &&
+      (${{ github.event.label.name == 'rebuild container image' }} || ${{ vars.REBUILD_CONTAINER_IMAGE == 'true' }})
     runs-on: ubuntu-latest
 
     steps:
