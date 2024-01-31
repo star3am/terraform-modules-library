@@ -34,14 +34,15 @@ debug:
 		echo $$module && make tflint-module MODULE=$$module; \
 	done
 
-.PHONY: push-modules-upstream
-push-modules-upstream:
-	for module in $(MODULES); do \
-		# echo $$module && \
+# This will only push modules and patterns to their upstream repos if they have a .module-version file
+.PHONY: push-modules-and-patterns-upstream
+push-modules-and-patterns-upstream:
+	@for module in `find -name .module-version | cut -d / -f2,3,4`; do \
+		echo "source-folder-path: $$module" && \
 		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)" && \
 		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
 		echo "cd $$module" && \
-		echo "git remote add origin git@github.com:star3am/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git" && \
+		echo "git remote add origin $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git" && \
         echo "git branch -M main" && \
         echo "git push -u origin main" && \
 		echo "cd ../../../"; \
