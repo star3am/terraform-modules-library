@@ -17,16 +17,6 @@ help:
 	@echo "Targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-38s\033[0m %s\n", $$1, $$2}'
 	@echo ""
-	@echo "Parameters:"
-	@echo -e "  \033[36mDIRECTORY=[environment-root-folder]\033[0m    Select the root folder to use for terragrunt execution"
-	@echo ""
-	@echo "Examples:"
-	@echo -e "  \033[36mmake format\033[0m                            Format all code"
-	@echo -e "  \033[36mmake lint\033[0m                              Lint all code"
-	@echo -e "  \033[36mmake plan-all DIRECTORY=./aws\033[0m  Apply all modules in the \`dev/\` folder"
-	@echo -e "  \033[36mmake plan DIRECTORY=./aws/modules/debug\033[0m  Apply specific module"
-	@echo -e "  \033[36mmake apply-all DIRECTORY=./aws/modules/debug\033[0m  Apply all modules in the \`dev/australiaeast/\` folder"
-	@echo ""
 
 .PHONY: debug
 debug:
@@ -36,7 +26,7 @@ debug:
 
 # This will only push modules and patterns to their upstream repos if they have a .module-version file
 .PHONY: push-modules-and-patterns-upstream
-push-modules-and-patterns-upstream:
+push-modules-and-patterns-upstream: ## Push modules and patterns that contains .module-version file upstrem
 	@for module in `find -name .module-version | cut -d / -f2,3,4`; do \
 		echo "source-folder-path: $$module" && \
 		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)" && \
