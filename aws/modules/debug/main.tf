@@ -17,7 +17,8 @@ terraform {
 
 resource "null_resource" "debug" {
   triggers = {
-    module_folder            = var.module_folder
+    module_folder = var.module_folder
+
     module_name              = var.module_name
     module_written_for_cloud = var.module_written_for_cloud
   }

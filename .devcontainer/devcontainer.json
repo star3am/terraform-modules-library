@@ -1,6 +1,6 @@
 {
   "dockerComposeFile": "../docker-compose.yml",
-  "service": "tools",
+  "service": "terraform-modules-library",
   "workspaceFolder": "/app",
   "postStartCommand": {
     "set-git-config-safe-directory": "git config --global --add safe.directory ${containerWorkspaceFolder}",

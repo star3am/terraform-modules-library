@@ -3,21 +3,20 @@
 # hhttps://github.com/marketplace/actions/build-and-publish-docker-image-to-github-container-registry
 name: "Terraform Modules Library Pipeline"
 
-on:
-  push:
+on: # yamllint disable-line rule:truthy
+  push: # yamllint disable-line rule:empty-values
 
+# TODO: Enable Terraform Cloud
 # env:
-#   TF_CLOUD_ORGANIZATION: "nolan"
+#   TF_CLOUD_ORGANIZATION: "YOUR_TF_CLOUD_ORGANIZATION"
 #   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
 #   TF_WORKSPACE: "terraform-hashicorp-hashiqube"
 #   CONFIG_DIRECTORY: "./"
 
 jobs:
   build-and-publish-latest:
-    # if: ${{ github.event.label.name == 'rebuild container image' }}
+    if: ${{ github.event.label.name == 'rebuild container image' }}
     runs-on: ubuntu-latest
-    # Running this job only for master branch
-    # if: github.ref == 'refs/heads/main'
 
     steps:
       # Checking out the repo
@@ -34,22 +33,37 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # https://github.com/marketplace/actions/docker-build-push-action
-      - uses: mr-smithers-excellent/docker-build-push@v6
-        name: Build and Push Docker image
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          image: terraform-modules-library-container
-          tags: latest
           registry: ghcr.io
-          multiPlatform: true
-          platform: linux/amd64,linux/arm64
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ghcr.io/${{ github.repository }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # https://github.com/docker/metadata-action#tags-input
+          # tags: ${{ steps.meta.outputs.tags }}
+          tags: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest # INFO: Hardcoding latest tag
+          labels: ${{ steps.meta.outputs.labels }}
+
   run-run-dot-sh:
     runs-on: ubuntu-latest
+    needs: build-and-publish-latest
+    if: |
+      always() &&
+      (needs.build-and-publish-latest.result == 'success' || needs.build-and-publish-latest.result == 'skipped')
     container:
-      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest # INFO: Pinned to latest tag
       options: --user 1001
 
     steps:
@@ -70,3 +84,65 @@ jobs:
 
       - name: Run
         run: ./run.sh
+
+  # TODO: Enable Terraform Cloud
+  # terraform-plan-on-tfc:
+  #   needs: run-run-dot-sh
+  #   if: |
+  #     always() &&
+  #     (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped')
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
+  #     options: --user 1001
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+  #     - name: Upload Configuration aws/patterns/server-linux
+  #       uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+  #       id: aws-patterns-server-linux-plan-upload
+  #       with:
+  #         workspace: "terraform-modules-library"
+  #         directory: "./aws/patterns/server-linux"
+  #         speculative: true
+
+  #     - name: Create Plan Run aws/patterns/server-linux
+  #       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+  #       id: aws-patterns-server-linux-plan-run
+  #       with:
+  #         workspace: "terraform-modules-library"
+  #         configuration_version: ${{ steps.aws-patterns-server-linux-plan-upload.outputs.configuration_version_id }}
+  #         plan_only: true
+
+  #     - name: Upload Configuration aws/patterns/server-windows
+  #       uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+  #       id: aws-patterns-server-windows-plan-upload
+  #       with:
+  #         workspace: "terraform-modules-library"
+  #         directory: "./aws/patterns/server-windows"
+  #         speculative: true
+
+  #     - name: Create Plan Run aws/patterns/server-linux
+  #       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+  #       id: aws-patterns-server-windows-plan-run
+  #       with:
+  #         workspace: "terraform-modules-library"
+  #         configuration_version: ${{ steps.aws-patterns-server-windows-plan-upload.outputs.configuration_version_id }}
+  #         plan_only: true
+
+  #     - name: Upload Configuration custom/modules/debug
+  #       uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+  #       id: custom-modules-debug-plan-upload
+  #       with:
+  #         workspace: "terraform-modules-library"
+  #         directory: "./custom/modules/debug"
+  #         speculative: true
+
+  #     - name: Create Plan Run custom/modules/debug
+  #       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+  #       id: custom-modules-debug-plan-run
+  #       with:
+  #         workspace: "terraform-modules-library"
+  #         configuration_version: ${{ steps.custom-modules-debug-plan-upload.outputs.configuration_version_id }}
+  #         plan_only: true

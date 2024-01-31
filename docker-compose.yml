@@ -1,7 +1,7 @@
 ---
 version: "3.4"
 services:
-  tools:
+  terraform-modules-library:
     tty: true
     # Build the container from the Dockerfile before we run it
     build:

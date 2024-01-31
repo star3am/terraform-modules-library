@@ -34,6 +34,19 @@ debug:
 		echo $$module && make tflint-module MODULE=$$module; \
 	done
 
+.PHONY: push-modules-upstream
+push-modules-upstream:
+	for module in $(MODULES); do \
+		# echo $$module && \
+		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)" && \
+		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
+		echo "cd $$module" && \
+		echo "git remote add origin git@github.com:star3am/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git" && \
+        echo "git branch -M main" && \
+        echo "git push -u origin main" && \
+		echo "cd ../../../"; \
+	done
+
 .PHONY: format
 format: ## Format Terraform code
 format: terraform-format
@@ -91,6 +104,16 @@ tfsec: ## TFSec all terraform modules
 		cd ../../../; \
 	done
 
+.PHONY: checkov
+checkov: ## Checkov all terraform modules
+	$(info --- checkov)
+	@for module in $(MODULES); do \
+		echo Running checkov validate on $$module; \
+		cd $$module; \
+		checkov -d ./ --skip-path examples; \
+		cd ../../../; \
+	done
+
 .PHONY: clean
 clean: ## Remove the .terragrunt-cache directories
 	$(info --- clean)
@@ -108,7 +131,7 @@ docs: ## Generate teraform-docs for all modules
 .PHONY: docs-module
 docs-module: module-vars
 	$(info --- docs-module ($(MODULE)))
-	@$(call run_command,terraform-docs markdown document --hide requirements --escape=false --sort-by required "$(MODULE)" > "$(MODULE)/README.md")
+	@$(call run_command, mkdir -p $(MODULE)/docs; terraform-docs markdown document --hide requirements --escape=false --sort-by required "$(MODULE)" > "$(MODULE)/docs/README.md")
 
 .PHONY: init-all
 init-all: ## Run `terraform init` for specifc [DIRECTORY]
