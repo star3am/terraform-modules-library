@@ -24,18 +24,34 @@ debug:
 		echo $$module && make tflint-module MODULE=$$module; \
 	done
 
-# This will only push modules and patterns to their upstream repos if they have a .module-version file
+# This will only push modules/patterns to their upstream repos if they have a .module-version file
+# The repositories must* exist before you can push modules/patterns to their upstream repos
 .PHONY: push-modules-and-patterns-upstream
 push-modules-and-patterns-upstream: ## Push modules and patterns that contains .module-version file upstrem
-	@for module in `find -name .module-version | cut -d / -f2,3,4`; do \
-		echo "source-folder-path: $$module" && \
+    # Only find modules/patterns with .module-version file in the directory
+	@for module in `find -name .module-version | grep -v tmp | cut -d / -f2,3,4`; do \
+	    echo "source-folder-path: $$module" && \
+		echo "temporary-folder-path: tmp/$$module" && \
 		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)" && \
 		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
-		echo "cd $$module" && \
-		echo "git remote add origin $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git" && \
-        echo "git branch -M main" && \
-        echo "git push -u origin main" && \
-		echo "cd ../../../"; \
+	    echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
+		rm -rf tmp/$$module && \
+        mkdir -p tmp/$$module && \
+		cd tmp/$$module && \
+		git clone $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
+		cd /app && \
+        cp -r $$module/* tmp/$$module && \
+		cd tmp/$$module && \
+		git config --global user.email "riaan.nolan@gmail.com" && \
+        git config --global user.name "Riaan Nolan" && \
+		git status && \
+		git add . && \
+		git commit -am "ADD CI COMMIT MESSAGE HERE" && \
+        git push && \
+		git tag --list && \
+		git tag $$(cat $$module/.module-version) && \
+		git push --tags && \
+		cd /app; \
 	done
 
 .PHONY: format

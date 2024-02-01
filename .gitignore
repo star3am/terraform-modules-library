@@ -39,3 +39,6 @@ terraform.rc
 
 # Ignore lock files
 *.lock.hcl
+
+# Ignore tmp folder for upstream push of modules/patters
+**tmp**
