@@ -17,16 +17,6 @@ help:
 	@echo "Targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-38s\033[0m %s\n", $$1, $$2}'
 	@echo ""
-	@echo "Parameters:"
-	@echo -e "  \033[36mDIRECTORY=[environment-root-folder]\033[0m    Select the root folder to use for terragrunt execution"
-	@echo ""
-	@echo "Examples:"
-	@echo -e "  \033[36mmake format\033[0m                            Format all code"
-	@echo -e "  \033[36mmake lint\033[0m                              Lint all code"
-	@echo -e "  \033[36mmake plan-all DIRECTORY=./aws\033[0m  Apply all modules in the \`dev/\` folder"
-	@echo -e "  \033[36mmake plan DIRECTORY=./aws/modules/debug\033[0m  Apply specific module"
-	@echo -e "  \033[36mmake apply-all DIRECTORY=./aws/modules/debug\033[0m  Apply all modules in the \`dev/australiaeast/\` folder"
-	@echo ""
 
 .PHONY: debug
 debug:
@@ -34,18 +24,41 @@ debug:
 		echo $$module && make tflint-module MODULE=$$module; \
 	done
 
-.PHONY: push-modules-upstream
-push-modules-upstream:
-	for module in $(MODULES); do \
-		# echo $$module && \
+# This will only push modules/patterns to their upstream repos if they have a .module-version file
+# The repositories must* exist before you can push modules/patterns to their upstream repos
+.PHONY: push-modules-and-patterns-upstream
+push-modules-and-patterns-upstream: ## Push modules and patterns that contains .module-version file upstrem
+    # Only find modules/patterns with .module-version file in the directory
+	@for module in `find -name .module-version | grep -v tmp | cut -d / -f2,3,4`; do \
+	    echo "source-folder-path: $$module" && \
+		echo "temporary-folder-path: tmp/$$module" && \
 		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)" && \
+		pwd && \
+		cd /app && \
 		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
-		echo "cd $$module" && \
-		echo "git remote add origin git@github.com:star3am/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git" && \
-        echo "git branch -M main" && \
-        echo "git push -u origin main" && \
-		echo "cd ../../../"; \
+	    echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
+		rm -rf tmp/$$module && \
+        mkdir -p tmp/$$module && \
+		cd tmp/$$module && \
+		git clone $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
+		cd /app && \
+        cp -a $$module/. tmp/$$module/ && \
+		cd tmp/$$module && \
+		git config --global user.email "$$(git config --get user.email)" && \
+        git config --global user.name "$$(git config --get user.name)" && \
+		git status && \
+		git add . && \
+		git commit -am "$$(git log -n 1 --pretty=format:'%s')" &> /dev/null || true && \
+        git push && \
+		git tag --list && \
+		git tag $$(cat .module-version) || true && \
+		git push --tags || true && \
+		cd /app; \
 	done
+	tree -L 3 tmp/ && \
+	echo "Removing tmp directory" && \
+    echo "Done" && \
+	rm -rf tmp; \
 
 .PHONY: format
 format: ## Format Terraform code

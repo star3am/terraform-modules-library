@@ -1,9 +1,10 @@
 # Local .terraform directories
 **/.terraform/*
 
-# Local .terragrunt-cache directories
+# Local .terragrunt directories and files
 **/.terragrunt-cache*
 **.terragrunt-cache**
+terragrunt.*
 
 # .tfstate files
 *.tfstate
@@ -36,9 +37,3 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
-# Ignore lock files
-*.lock.hcl
-
-# Ignore tmp folder for upstream push of modules/patters
-**tmp**
