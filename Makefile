@@ -33,6 +33,8 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 	    echo "source-folder-path: $$module" && \
 		echo "temporary-folder-path: tmp/$$module" && \
 		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)" && \
+		pwd && \
+		cd /app && \
 		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
 	    echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
 		rm -rf tmp/$$module && \
@@ -40,19 +42,23 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		cd tmp/$$module && \
 		git clone $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
 		cd /app && \
-        cp -r $$module/* tmp/$$module && \
+        cp -a $$module/. tmp/$$module/ && \
 		cd tmp/$$module && \
-		git config --global user.email "riaan.nolan@gmail.com" && \
-        git config --global user.name "Riaan Nolan" && \
+		git config --global user.email "$$(git config --get user.email)" && \
+        git config --global user.name "$$(git config --get user.name)" && \
 		git status && \
 		git add . && \
-		git commit -am "ADD CI COMMIT MESSAGE HERE" && \
+		git commit -am "$$(git log -n 1 --pretty=format:'%s')" &> /dev/null || true && \
         git push && \
 		git tag --list && \
-		git tag $$(cat $$module/.module-version) && \
-		git push --tags && \
+		git tag $$(cat .module-version) || true && \
+		git push --tags || true && \
 		cd /app; \
 	done
+	tree -L 3 tmp/ && \
+	echo "Removing tmp directory" && \
+    echo "Done" && \
+	rm -rf tmp; \
 
 .PHONY: format
 format: ## Format Terraform code
