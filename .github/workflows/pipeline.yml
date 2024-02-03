@@ -97,36 +97,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Upload Configuration aws/patterns/server-linux
+      - name: Upload Configuration aws/modules/debug
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: aws-patterns-server-linux-plan-upload
+        id: aws-modules-debug-plan-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./aws/patterns/server-linux"
+          directory: "./aws/modules/debug"
           speculative: true
 
-      - name: Create Plan Run aws/patterns/server-linux
+      - name: Create Plan Run aws/modules/debug
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: aws-patterns-server-linux-plan-run
+        id: aws-modules-debug-plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.aws-patterns-server-linux-plan-upload.outputs.configuration_version_id }}
-          plan_only: true
-
-      - name: Upload Configuration aws/patterns/server-windows
-        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: aws-patterns-server-windows-plan-upload
-        with:
-          workspace: "terraform-modules-library"
-          directory: "./aws/patterns/server-windows"
-          speculative: true
-
-      - name: Create Plan Run aws/patterns/server-linux
-        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: aws-patterns-server-windows-plan-run
-        with:
-          workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.aws-patterns-server-windows-plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.aws-modules-debug-plan-upload.outputs.configuration_version_id }}
           plan_only: true
 
       - name: Upload Configuration custom/modules/debug
