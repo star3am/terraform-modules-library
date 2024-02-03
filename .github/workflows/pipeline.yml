@@ -110,7 +110,7 @@ jobs:
       - name: Push Modules and Patterns Upstream
         run: make push-modules-and-patterns-upstream
         env:
-          - ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+          ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
 
   terraform-plan-on-tfc:
     needs: push-modules-and-patterns-upstream
