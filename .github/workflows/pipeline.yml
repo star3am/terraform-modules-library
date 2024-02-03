@@ -102,7 +102,7 @@ jobs:
         run: cd $GITHUB_WORKSPACE
 
       - name: Debug
-        run: pwd; ls -la
+        run: pwd; ls -la; ls -la aws/modules/debug/
 
       - name: Push Modules and Patterns Upstream
         run: make push-modules-and-patterns-upstream
