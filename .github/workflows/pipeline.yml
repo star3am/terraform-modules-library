@@ -84,11 +84,31 @@ jobs:
       - name: Run
         run: ./run.sh
 
-  terraform-plan-on-tfc:
+  push-modules-and-patterns-upstream:
+    runs-on: ubuntu-latest
     needs: run-run-dot-sh
     if: |
       always() &&
       (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped')
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest # INFO: Pinned to latest tag
+      options: --user 1001
+
+    steps:
+      # Checking out the repo
+      - uses: actions/checkout@v3
+
+      - name: cd GITHUB_WORKSPACE
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Push Modules and Patterns Upstream
+        run: make push-modules-and-patterns-upstream
+
+  terraform-plan-on-tfc:
+    needs: push-modules-and-patterns-upstream
+    if: |
+      always() &&
+      (needs.push-modules-and-patterns-upstream.result == 'success' || needs.push-modules-and-patterns-upstream.result == 'skipped')
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
