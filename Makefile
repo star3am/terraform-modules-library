@@ -43,7 +43,7 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		rm -rf tmp/$$module && \
 		mkdir -p tmp/$$module && \
 		cd tmp/$$module && \
-		git clone https://oauth2:$(ACCESS_TOKEN_GITHUB)@github.com/$$(echo terraform)/$$(git config --get remote.origin.url | cut -d / -f4)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
+		git clone https://oauth2:$(ACCESS_TOKEN_GITHUB)@github.com/$$(git config --get remote.origin.url | cut -d / -f4)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
 		cd ../../../../ && \
 		cp -a $$module/. tmp/$$module/ && \
 		cd tmp/$$module && \
