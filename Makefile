@@ -47,15 +47,15 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		cd ../../../../ && \
 		cp -a $$module/. tmp/$$module/ && \
 		cd tmp/$$module && \
-		# git config --global user.email "$$(git config --get user.email)" && \
-		# git config --global user.name "$$(git config --get user.name)" && \
-		# git status && \
-		# git add . && \
-		# git commit -am "$$(git log -n 1 --pretty=format:'%s')" &> /dev/null || true && \
-		# git push && \
-		# git tag --list && \
-		# git tag v$$(cat .module-version) || true && \
-		# git push --tags || true && \
+		git config --global user.email "$$(git config --get user.email)" && \
+		git config --global user.name "$$(git config --get user.name)" && \
+		git status && \
+		git add . && \
+		git commit -am "$$(git log -n 1 --pretty=format:'%s')" &> /dev/null || true && \
+		git push && \
+		git tag --list && \
+		git tag v$$(cat .module-version) || true && \
+		git push --tags || true && \
 		cd ../../../../; \
 	done
 	tree -L 3 tmp/ && \
