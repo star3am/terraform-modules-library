@@ -36,11 +36,14 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		pwd && \
 		# cd /app && \
 		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
-		echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
+		# Git SSH URL
+		# echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
+		# Git HTTPS URL
+		echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1,2,3,4)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
 		rm -rf tmp/$$module && \
 		mkdir -p tmp/$$module && \
 		cd tmp/$$module && \
-		git clone $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
+		git clone $$(git config --get remote.origin.url | cut -d / -f1,2,3,4)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git . && \
 		cd ../../../../ && \
 		cp -a $$module/. tmp/$$module/ && \
 		cd tmp/$$module && \
