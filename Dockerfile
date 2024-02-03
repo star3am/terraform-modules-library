@@ -151,6 +151,6 @@ ENV PATH="$PATH:/home/ubuntu/.local/bin"
 RUN python3 -m pip install --no-cache-dir --quiet --upgrade azure-cli
 
 # pre-commit https://pre-commit.com/#install
-RUN python3 -m pip install --no-cache-dir --quiet --upgrade --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org git+https://github.com/pre-commit/pre-commit.git@v2.20.0
+RUN python3 -m pip install --no-cache-dir --quiet --upgrade --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org git+https://github.com/pre-commit/pre-commit.git@v3.6.0
 
 WORKDIR /app
