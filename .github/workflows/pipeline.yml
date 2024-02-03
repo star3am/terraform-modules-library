@@ -101,7 +101,7 @@ jobs:
       - name: cd GITHUB_WORKSPACE
         run: cd $GITHUB_WORKSPACE
 
-      - name: Debug
+      - name: Env
         run: env
 
       - name: Debug
@@ -109,6 +109,8 @@ jobs:
 
       - name: Push Modules and Patterns Upstream
         run: make push-modules-and-patterns-upstream
+        env:
+          - ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
 
   terraform-plan-on-tfc:
     needs: push-modules-and-patterns-upstream

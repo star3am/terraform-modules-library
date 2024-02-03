@@ -36,7 +36,10 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		pwd && \
 		# cd /app && \
 		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
-		echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
+		# Local
+		# echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
+		# Github Actions
+		# echo "Cloning $$(echo https://)$(ACCESS_TOKEN_GITHUB)/$$(echo github.com)/$(GITHUB_REPOSITORY_OWNER)/$$(echo terraform)-$$(echo $$module | cut -d / -f2 | head -c -2)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3).git into 'tmp/$$module'..." && \
 		rm -rf tmp/$$module && \
 		mkdir -p tmp/$$module && \
 		cd tmp/$$module && \
