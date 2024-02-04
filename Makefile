@@ -47,7 +47,9 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		cd ../../../../ && \
 		cp -a $$module/. tmp/$$module/ && \
 		cd tmp/$$module && \
+		echo "git config --global user.email \"$$(git config --get user.email)\"" && \
 		git config --global user.email "$$(git config --get user.email)" && \
+		echo "git config --global user.name \"$$(git config --get user.name)\"" && \
 		git config --global user.name "$$(git config --get user.name)" && \
 		git status && \
 		pwd && \
