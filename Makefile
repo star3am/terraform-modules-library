@@ -52,7 +52,7 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		git status && \
 		pwd && \
 		ls -la && \
-		git add . && \
+		git add --all && \
 		echo "Git add ." && \
 		git status && \
 		git commit -am "$$(git log -n 1 --pretty=format:'%s')" &> /dev/null || true && \
