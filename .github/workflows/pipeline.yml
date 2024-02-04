@@ -101,11 +101,11 @@ jobs:
       - name: cd GITHUB_WORKSPACE
         run: cd $GITHUB_WORKSPACE
 
-      - name: Debug
-        run: git config --list; pwd; ls -la; ls -la aws/modules/debug/; tree -L 4
+      # - name: Debug
+      #   run: git config --list; pwd; ls -la; ls -la aws/modules/debug/; tree -L 4
 
-      - name: Env
-        run: env
+      # - name: Env
+      #   run: env
 
       - name: Push Modules and Patterns Upstream
         run: make push-modules-and-patterns-upstream
