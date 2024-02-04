@@ -51,7 +51,7 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		git config --global user.name "$$(git config --get user.name)" && \
 		git status && \
 		git add . && \
-		echo "Git add ."
+		echo "Git add ." && \
 		git status && \
 		git commit -am "$$(git log -n 1 --pretty=format:'%s')" &> /dev/null || true && \
 		git push && \
