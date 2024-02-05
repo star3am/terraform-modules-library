@@ -41,22 +41,21 @@ if-else:
 push-modules-and-patterns-upstream: ## Push modules and patterns that contains .module-version file upstrem
   # Only find modules/patterns with .module-version file in the directory
 	@for module in `find -name .module-version | grep -v tmp | cut -d / -f2,3,4`; do \
-		echo "source-folder-path: $$module" && \
-		echo "temporary-folder-path: tmp/$$module" && \
-		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2)" && \
-		pwd && \
-		# cd /app && \
-		echo "destination-repository-tag: $$(cat $$module/.module-version)" && \
-		# Git SSH URL && \
-		# echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git into 'tmp/$$module'..." && \
-		# Git HTTPS URL && \
-		echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1,2,3,4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git into 'tmp/$$module'..." && \
-		rm -rf tmp/$$module && \
-		mkdir -p tmp/$$module && \
-		cd tmp/$$module && \
-		git clone https://oauth2:$(ACCESS_TOKEN_GITHUB)@github.com/$$(git config --get remote.origin.url | cut -d / -f4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git . && \
-		if [ $? -ne 0 ]; then \
+		echo "source-folder-path: $$module"; \
+		echo "temporary-folder-path: tmp/$$module"; \
+		echo "destination-repository-name: $$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2)"; \
+		pwd; \
+		echo "destination-repository-tag: $$(cat $$module/.module-version)"; \
+		# Git SSH URL; \
+		# echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git into 'tmp/$$module'..."; \
+		# Git HTTPS URL; \
+		echo "Cloning $$(git config --get remote.origin.url | cut -d / -f1,2,3,4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git into 'tmp/$$module'..."; \
+		rm -rf tmp/$$module; \
+		mkdir -p tmp/$$module; \
+		cd tmp/$$module; \
+		if ! (git clone https://oauth2:$(ACCESS_TOKEN_GITHUB)@github.com/$$(git config --get remote.origin.url | cut -d / -f4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git .); then \
         	echo "There was an Error Cloning $$(git config --get remote.origin.url | cut -d / -f1,2,3,4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git into 'tmp/$$module'..."; \
+			echo "Does the repository exist? We use ACCESS_TOKEN_GITHUB in secrets to do git operations"; \
 			exit 1; \
 		else \
 		    echo "$$module"; \
