@@ -16,28 +16,58 @@ A quick video walk through demo of this solution
 
 ![Terraform Modules Library](images/demo.gif?raw=true "Terraform Modules Library")
 
+## Information
+
+This repository consists basically of 3 topics.
+
+1. Develppment Environment
+
+- Dev Containers
+- Docker
+- VSCode Local Dev
+- Github Codespaces Remote Dev
+- Github Actions
+- run.sh
+
+2. Governance and Compliance
+
+- Pre-Commit
+- TFSec and Checkov
+- Terraform fmt and validate
+- Linters
+- Terraform docs
+- Terraform Cloud
+
+3. Terraform Modules and Patterns Library
+
+- Modules and Patterns
+- Versioning with SemVer
+- Terraform Cloud Private Module Registry
+
 ## Features
 
 This repository uses some best practice tools to help us with our modules. Tools such as TFENV which automatically installs the correct Terraform Version, Terraform Docs and Terraform Lint, the comprehensive feature list is detailed below.
 
-| Product | State |
-|-------|---------|
-| VSCode Dev Container | ✓ |
-| Pre-Commit | ✓ |
-| Terratest | ✘ |
-| Terraform | ✓ |
-| Terragrunt | ✓ |
-| TFEnv | ✓ |
-| TGEnv | ✓ |
-| TFsec | ✓ |
-| AWS | ✓ |
-| GCP | ✓ |
-| Azure | ✓ |
-| Custom | ✓ |
-| Terraform Lint | ✓ |
-| Terraform Format | ✓ |
-| Terraform Validate | ✓ |
-| Terraform Docs | ✓ |
+| Product | State | URL |
+|---------|-------|-----|
+| VSCode Dev Container | ✓ | https://code.visualstudio.com/docs/devcontainers/containers |
+| Pre-Commit | ✓ | https://pre-commit.com/ |
+| Terratest | ✘ | https://terratest.gruntwork.io/ |
+| Terraform | ✓ | https://www.terraform.io/ |
+| Terraform Cloud | ✓ | https://app.terraform.io/ |
+| Terragrunt | ✓ | https://terragrunt.gruntwork.io/ |
+| TFEnv | ✓ | https://github.com/tfutils/tfenv |
+| TGEnv | ✓ | https://github.com/cunymatthieu/tgenv |
+| TFsec | ✓ | https://github.com/aquasecurity/tfsec |
+| Checkov | ✓ | https://www.checkov.io/ |
+| AWS | ✓ | https://aws.amazon.com/free/ |
+| GCP | ✓ | https://cloud.google.com/free/ |
+| Azure | ✓ | https://azure.microsoft.com/en-au/free/ |
+| Custom | ✓ | - |
+| Terraform Lint | ✓ | https://github.com/terraform-linters/tflint |
+| Terraform Format | ✓ | https://developer.hashicorp.com/terraform/cli/commands/fmt |
+| Terraform Validate | ✓ | https://developer.hashicorp.com/terraform/cli/commands/validate |
+| Terraform Docs | ✓ | https://github.com/terraform-docs/terraform-docs |
 
 - Pre-commit: Runs pre-commit with the given config in `.pre-commit-config.yaml.
 
@@ -52,6 +82,91 @@ This repository uses some best practice tools to help us with our modules. Tools
 - Terraform docs: Create README.md files for each Terraform Module on the fly, generated from your code
 
 - Terraform Plan: Using Terragrunt we run a plan on all modules
+
+## Module and Pattern Publishing
+
+You can think of this repository as your library of modules and patterns. Although you can work on each module and pattern seperately using their own repository, you'd have to duplicate many things, for example the devcontainer, the pre-commit rules and so on.
+
+For that reason, we've chosen a Monorepo.
+
+The publishing mechanism works as follows:
+
+Terraform Modules Library -> Modules Own Gihub Repository - Terraform Cloud Private Registry
+
+1. You code and commit and test your modules in this repo.
+
+![Terraform Modules Library](images/terraform-modules-library-repository-codespace-editor.png?raw=true "Terraform Modules Library")
+
+2. Once your module is ready, you create a `.module-version` file in the module's directory.
+
+![Terraform Modules Library](images/terraform-modules-library-aws-modules-debug-module-version-file.png?raw=true "Terraform Modules Library")
+
+The Github Actions pipeline will run and detect a `.module-version` file and publish the module to it's own repository.
+
+:bulb: Note for the module to be published you need a Personal Access Token with repository rights and this should be added in your repository Github Actions Secrets as:
+
+```
+- name: Push Modules and Patterns Upstream
+  run: make push-modules-and-patterns-upstream
+  env:
+    ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+```
+
+See screenshot below:
+
+![Terraform Modules Library](images/terraform-modules-library-repository-secrets.png?raw=true "Terraform Modules Library")
+
+The Github action will publish in the following name convention for example:
+
+```
+aws/module/debug -> terraform-aws-dbug-module
+azure/module/resource-group -> terraform-azure-resource-group-module
+```
+and so on...
+
+3. Create the modules own repository, for example, if your module is in `aws/module/debug` you will create the following github repository `terraform-aws-dbug-module` see above.
+
+![Terraform Modules Library](images/aws-modules-debug-repository.png?raw=true "Terraform Modules Library")
+
+4. Add the module in Terraform Cloud, and everything after that is Automated.
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-connect-to-vcs.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-select-repository.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module-wait-to-become-ready.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module-is-ready.png?raw=true "Terraform Modules Library")
+
+This repository has modules and patterns in the following derectories as demostrated below.
+
+```
+.
+├── aws
+│   ├── modules
+│   │   └── debug
+│   └── patterns
+│       ├── multiple-ec2-vms
+│       ├── multiple-ec2-vms-behind-elb
+│       └── single-ec2-vm
+├── azure
+│   ├── modules
+│   │   ├── debug
+│   │   └── resource-group
+│   └── patterns
+├── custom
+│   ├── modules
+│   │   └── debug
+│   └── patterns
+├── gcp
+│   ├── modules
+│   │   └── debug
+│   └── patterns
+```
 
 ## Getting started
 
