@@ -95,7 +95,26 @@ Terraform Modules Library -> Modules Own Gihub Repository - Terraform Cloud Priv
 
 1. You code and commit and test your modules in this repo.
 
+![Terraform Modules Library](images/terraform-modules-library-repository-codespace-editor.png?raw=true "Terraform Modules Library")
+
 2. Once your module is ready, you create a `.module-version` file in the module's directory.
+
+![Terraform Modules Library](images/terraform-modules-library-aws-modules-debug-module-version-file.png?raw=true "Terraform Modules Library")
+
+The Github Actions pipeline will run and detect a `.module-version` file and publish the module to it's own repository. 
+
+:bulb: Note for the module to be published you need a Personal Access Token with repository rights and this should be added in your repository Github Actions Secrets as: 
+
+```
+- name: Push Modules and Patterns Upstream
+  run: make push-modules-and-patterns-upstream
+  env:
+    ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+```
+
+See screenshot below: 
+
+![Terraform Modules Library](images/terraform-modules-library-repository-secrets.png?raw=true "Terraform Modules Library")
 
 The Github action will publish in the following name convention for example:
 
@@ -107,7 +126,21 @@ and so on...
 
 3. Create the modules own repository, for example, if your module is in `aws/module/debug` you will create the following github repository `terraform-aws-dbug-module` see above.
 
+![Terraform Modules Library](images/aws-modules-debug-repository.png?raw=true "Terraform Modules Library")
+
 4. Add the module in Terraform Cloud, and everything after that is Automated.
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-connect-to-vcs.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-select-repository.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module-wait-to-become-ready.png?raw=true "Terraform Modules Library")
+
+![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module-is-ready.png?raw=true "Terraform Modules Library")
 
 This repository has modules and patterns in the following derectories as demostrated below.
 
