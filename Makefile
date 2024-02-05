@@ -20,9 +20,20 @@ help:
 
 .PHONY: debug
 debug:
-	for module in $(MODULES); do \
-		echo $$module && make tflint-module MODULE=$$module; \
+	@for module in $(MODULES); do \
+		echo $$module && \
+		if [ "$$module" != "test" ]; then \
+        	echo "$$module does not equal test"; \
+		else \
+		    echo "$$module"; \
+    	fi \
 	done
+
+.PHONY: if-else
+if-else:
+	@if [ "test" = "test" ]; then\
+        echo "Hello world";\
+    fi
 
 # This will only push modules/patterns to their upstream repos if they have a .module-version file
 # The repositories must* exist before you can push modules/patterns to their upstream repos
@@ -44,24 +55,30 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		mkdir -p tmp/$$module && \
 		cd tmp/$$module && \
 		git clone https://oauth2:$(ACCESS_TOKEN_GITHUB)@github.com/$$(git config --get remote.origin.url | cut -d / -f4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git . && \
-		cd ../../../../ && \
-		cp -a $$module/. tmp/$$module/ && \
-		cd tmp/$$module && \
-		git config --global user.email "$(GITHUB_REPOSITORY)@github.com" && \
-		git config --global user.name "$(GITHUB_ACTOR)" && \
-		git status && \
-		pwd && \
-		ls -la && \
-		git add -A && \
-		echo "Git add -A" && \
-		git status && \
-		git commit -am "$$(git log -n 1 --pretty=format:'%s')" || true && \
-		git push && \
-		git status && \
-		git tag --list && \
-		git tag v$$(cat .module-version) || true && \
-		git push --tags || true && \
-		cd ../../../../; \
+		if [ $? -ne 0 ]; then \
+        	echo "There was an Error Cloning $$(git config --get remote.origin.url | cut -d / -f1,2,3,4)/$$(echo terraform)-$$(echo $$module | cut -d / -f1)-$$(echo $$module | cut -d / -f3)-$$(echo $$module | cut -d / -f2 | head -c -2).git into 'tmp/$$module'..."; \
+			exit 1; \
+		else \
+		    echo "$$module"; \
+			cd ../../../../; \
+			cp -a $$module/. tmp/$$module/;\
+			cd tmp/$$module; \
+			git config --global user.email "$(GITHUB_REPOSITORY)@github.com"; \
+			git config --global user.name "$(GITHUB_ACTOR)"; \
+			git status; \
+			pwd; \
+			ls -la; \
+			git add -A; \
+			echo "Git add -A"; \
+			git status; \
+			git commit -am "$$(git log -n 1 --pretty=format:'%s')" || true; \
+			git push; \
+			git status; \
+			git tag --list; \
+			git tag v$$(cat .module-version) || true; \
+			git push --tags || true; \
+			cd ../../../../; \
+    	fi \
 	done
 	tree -L 3 tmp/ && \
 	echo "Removing tmp directory" && \
