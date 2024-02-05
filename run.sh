@@ -32,5 +32,5 @@ make validate
 echo "make docs"
 make docs
 
-echo "make plan-all"
-make plan-all
+# echo "make plan-all"
+# make plan-all
