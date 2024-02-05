@@ -16,28 +16,58 @@ A quick video walk through demo of this solution
 
 ![Terraform Modules Library](images/demo.gif?raw=true "Terraform Modules Library")
 
+## Information
+
+This repository consists basically of 3 topics. 
+
+1. Develppment Environment
+
+- Dev Containers
+- Docker
+- VSCode Local Dev
+- Github Codespaces Remote Dev
+- Github Actions
+- run.sh 
+
+2. Governance and Compliance
+
+- Pre-Commit
+- TFSec and Checkov
+- Terraform fmt and validate
+- Linters
+- Terraform docs
+- Terraform Cloud
+
+3. Terraform Modules and Patterns Library
+
+- Modules and Patterns
+- Versioning with SemVer
+- Terraform Cloud Private Module Registry
+
 ## Features
 
 This repository uses some best practice tools to help us with our modules. Tools such as TFENV which automatically installs the correct Terraform Version, Terraform Docs and Terraform Lint, the comprehensive feature list is detailed below.
 
-| Product | State |
-|-------|---------|
-| VSCode Dev Container | ✓ |
-| Pre-Commit | ✓ |
-| Terratest | ✘ |
-| Terraform | ✓ |
-| Terragrunt | ✓ |
-| TFEnv | ✓ |
-| TGEnv | ✓ |
-| TFsec | ✓ |
-| AWS | ✓ |
-| GCP | ✓ |
-| Azure | ✓ |
-| Custom | ✓ |
-| Terraform Lint | ✓ |
-| Terraform Format | ✓ |
-| Terraform Validate | ✓ |
-| Terraform Docs | ✓ |
+| Product | State | URL |
+|---------|-------|-----|
+| VSCode Dev Container | ✓ | https://code.visualstudio.com/docs/devcontainers/containers |
+| Pre-Commit | ✓ | https://pre-commit.com/ |
+| Terratest | ✘ | https://terratest.gruntwork.io/ |
+| Terraform | ✓ | https://www.terraform.io/ |
+| Terraform Cloud | ✓ | https://app.terraform.io/ |
+| Terragrunt | ✓ | https://terragrunt.gruntwork.io/ |
+| TFEnv | ✓ | https://github.com/tfutils/tfenv |
+| TGEnv | ✓ | https://github.com/cunymatthieu/tgenv |
+| TFsec | ✓ | https://github.com/aquasecurity/tfsec |
+| Checkov | ✓ | https://www.checkov.io/ |
+| AWS | ✓ | https://aws.amazon.com/free/ |
+| GCP | ✓ | https://cloud.google.com/free/ |
+| Azure | ✓ | https://azure.microsoft.com/en-au/free/ |
+| Custom | ✓ | - |
+| Terraform Lint | ✓ | https://github.com/terraform-linters/tflint |
+| Terraform Format | ✓ | https://developer.hashicorp.com/terraform/cli/commands/fmt |
+| Terraform Validate | ✓ | https://developer.hashicorp.com/terraform/cli/commands/validate |
+| Terraform Docs | ✓ | https://github.com/terraform-docs/terraform-docs |
 
 - Pre-commit: Runs pre-commit with the given config in `.pre-commit-config.yaml.
 
@@ -52,6 +82,58 @@ This repository uses some best practice tools to help us with our modules. Tools
 - Terraform docs: Create README.md files for each Terraform Module on the fly, generated from your code
 
 - Terraform Plan: Using Terragrunt we run a plan on all modules
+
+## Module and Pattern Publishing
+
+You can think of this repository as your library of modules and patterns. Although you can work on each module and pattern seperately using their own repository, you'd have to duplicate many things, for example the devcontainer, the pre-commit rules and so on. 
+
+For that reason, we've chosen a Monorepo. 
+
+The publishing mechanism works as follows: 
+
+Terraform Modules Library -> Modules Own Gihub Repository - Terraform Cloud Private Registry
+
+1. You code and commit and test your modules in this repo. 
+
+2. Once your module is ready, you create a `.module-version` file in the module's directory. 
+
+The Github action will publish in the following name convention for example:
+
+```
+aws/module/debug -> terraform-aws-dbug-module
+azure/module/resource-group -> terraform-azure-resource-group-module
+```
+and so on...
+
+3. Create the modules own repository, for example, if your module is in `aws/module/debug` you will create the following github repository `terraform-aws-dbug-module` see above.
+
+4. Add the module in Terraform Cloud, and everything after that is Automated. 
+
+This repository has modules and patterns in the following derectories as demostrated below.
+
+```
+.
+├── aws
+│   ├── modules
+│   │   └── debug
+│   └── patterns
+│       ├── multiple-ec2-vms
+│       ├── multiple-ec2-vms-behind-elb
+│       └── single-ec2-vm
+├── azure
+│   ├── modules
+│   │   ├── debug
+│   │   └── resource-group
+│   └── patterns
+├── custom
+│   ├── modules
+│   │   └── debug
+│   └── patterns
+├── gcp
+│   ├── modules
+│   │   └── debug
+│   └── patterns
+```
 
 ## Getting started
 
