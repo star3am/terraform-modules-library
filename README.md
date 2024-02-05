@@ -101,9 +101,9 @@ Terraform Modules Library -> Modules Own Gihub Repository - Terraform Cloud Priv
 
 ![Terraform Modules Library](images/terraform-modules-library-aws-modules-debug-module-version-file.png?raw=true "Terraform Modules Library")
 
-The Github Actions pipeline will run and detect a `.module-version` file and publish the module to it's own repository. 
+The Github Actions pipeline will run and detect a `.module-version` file and publish the module to it's own repository.
 
-:bulb: Note for the module to be published you need a Personal Access Token with repository rights and this should be added in your repository Github Actions Secrets as: 
+:bulb: Note for the module to be published you need a Personal Access Token with repository rights and this should be added in your repository Github Actions Secrets as:
 
 ```
 - name: Push Modules and Patterns Upstream
@@ -112,7 +112,7 @@ The Github Actions pipeline will run and detect a `.module-version` file and pub
     ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
 ```
 
-See screenshot below: 
+See screenshot below:
 
 ![Terraform Modules Library](images/terraform-modules-library-repository-secrets.png?raw=true "Terraform Modules Library")
 
