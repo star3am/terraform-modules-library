@@ -18,7 +18,7 @@ A quick video walk through demo of this solution
 
 ## Information
 
-This repository consists basically of 3 topics. 
+This repository consists basically of 3 topics.
 
 1. Develppment Environment
 
@@ -27,7 +27,7 @@ This repository consists basically of 3 topics.
 - VSCode Local Dev
 - Github Codespaces Remote Dev
 - Github Actions
-- run.sh 
+- run.sh
 
 2. Governance and Compliance
 
@@ -85,17 +85,17 @@ This repository uses some best practice tools to help us with our modules. Tools
 
 ## Module and Pattern Publishing
 
-You can think of this repository as your library of modules and patterns. Although you can work on each module and pattern seperately using their own repository, you'd have to duplicate many things, for example the devcontainer, the pre-commit rules and so on. 
+You can think of this repository as your library of modules and patterns. Although you can work on each module and pattern seperately using their own repository, you'd have to duplicate many things, for example the devcontainer, the pre-commit rules and so on.
 
-For that reason, we've chosen a Monorepo. 
+For that reason, we've chosen a Monorepo.
 
-The publishing mechanism works as follows: 
+The publishing mechanism works as follows:
 
 Terraform Modules Library -> Modules Own Gihub Repository - Terraform Cloud Private Registry
 
-1. You code and commit and test your modules in this repo. 
+1. You code and commit and test your modules in this repo.
 
-2. Once your module is ready, you create a `.module-version` file in the module's directory. 
+2. Once your module is ready, you create a `.module-version` file in the module's directory.
 
 The Github action will publish in the following name convention for example:
 
@@ -107,7 +107,7 @@ and so on...
 
 3. Create the modules own repository, for example, if your module is in `aws/module/debug` you will create the following github repository `terraform-aws-dbug-module` see above.
 
-4. Add the module in Terraform Cloud, and everything after that is Automated. 
+4. Add the module in Terraform Cloud, and everything after that is Automated.
 
 This repository has modules and patterns in the following derectories as demostrated below.
 

@@ -1,6 +1,6 @@
 # Azurerm Resource Group Module
 
-This is an example module. It creates an Azure Resource Group. 
+This is an example module. It creates an Azure Resource Group.
 
 It's used for example purposes only.
 

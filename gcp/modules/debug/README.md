@@ -1,6 +1,6 @@
 # GCP Debug Module
 
-This is an example module. It does not create any resources. 
+This is an example module. It does not create any resources.
 
 It's used for example purposes only.
 
