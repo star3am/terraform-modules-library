@@ -125,34 +125,34 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Upload Configuration aws/modules/debug
+      - name: Upload Configuration aws/modules/terraform-aws-debug
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: aws-modules-debug-plan-upload
+        id: aws-modules-terraform-aws-debug-plan-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./aws/modules/debug"
+          directory: "./aws/modules/terraform-aws-debug"
           speculative: true
 
       - name: Create Plan Run aws/modules/debug
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: aws-modules-debug-plan-run
+        id: aws-modules-terraform-aws-debug-plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.aws-modules-debug-plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.aws-modules-terraform-aws-debug-plan-upload.outputs.configuration_version_id }}
           plan_only: true
 
-      - name: Upload Configuration custom/modules/debug
+      - name: Upload Configuration custom/modules/terraform-custom-debug
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: custom-modules-debug-plan-upload
+        id: custom-modules-terraform-custom-debug-plan-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./custom/modules/debug"
+          directory: "./custom/modules/terraform-custom-debug"
           speculative: true
 
       - name: Create Plan Run custom/modules/debug
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: custom-modules-debug-plan-run
+        id: custom-modules-terraform-custom-debug-plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.custom-modules-debug-plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.custom-modules-terraform-custom-debug-plan-upload.outputs.configuration_version_id }}
           plan_only: true
