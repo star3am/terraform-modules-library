@@ -8,6 +8,7 @@ repos:
     hooks:
       # Git style
       - id: check-added-large-files
+        args: ['--maxkb=1024']
       - id: check-merge-conflict
       - id: check-vcs-permalinks
       - id: forbid-new-submodules

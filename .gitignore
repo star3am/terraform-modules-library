@@ -42,3 +42,5 @@ terraform.rc
 
 # Ignore tmp folder for upstream push of modules/patters
 **tmp**
+
+**/.DS_Store
