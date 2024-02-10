@@ -20,6 +20,31 @@ To be able to take advantage of Dev Containers, you need Docker installed. You c
 
 ## VSCode Local Dev
 
+- Visual Studio Code https://code.visualstudio.com/download (with Remote development in Containers extension) https://code.visualstudio.com/docs/remote/containers-tutorial
+- Clone this repository
+- Now Open VSCode and Open this repository
+
+:bulb: Let's look at some Screenshots of Opening your project
+
+In VSCode, click File -> Open Folder and navigate to this project
+![VSCode open repository folder](../../images/vscode-open-repository-folder.png?raw=true "VSCode open repository folder")
+
+If you have installed the Devcontainer Extension in the previous step, you'd see a Notification, bottom Right.
+
+__Folder contains a Dev Container configuration file. Reopen folder to develop in a container__ and click `Reopen in Container`
+
+![VSCode open repository folder open in devcontainer](../../images/vscode-open-repository-folder-open-in-devcontainer.png?raw=true "VSCode open repository folder open in devcontainer")
+
+You will see the Docker Build log bottom right and once done, you will see the files of the project in VSCode.
+
+![VSCode open repository folder open in devcontainer docker build
+log](images/vscode-open-repository-folder-open-in-devcontainer-build-log.png?raw=true "VSCode open repository folder open in
+devcontainer docker build log")
+
+Now you can open a new Terminal. This will launch a new terminal inside the container, you will note that Terraform, Terragrunt and all the tools this project needs has already been installed for you.
+
+![VSCode open repository folder open in devcontainer new Terminal](../../images/vscode-open-repository-folder-open-in-devcontainer-new-terminal.png?raw=true "VSCode open repository folder open in devcontainer new Terminal")
+
 ## Github Codespaces Remote Dev
 
 - https://github.com/features/codespaces
@@ -89,7 +114,6 @@ Because we installed the HashiCorp Terraform Extension via our Devcontainer.json
 
 .devcontainer/devcontainer.json
 ```json
-...
   "customizations": {
     "vscode": {
       "extensions": [
@@ -100,7 +124,6 @@ Because we installed the HashiCorp Terraform Extension via our Devcontainer.json
       ]
     }
   }
-...
 ```
 In order to access Terraform Cloud and our workspaces, we need to Authenticate, so let's go through that process now.
 
@@ -147,5 +170,21 @@ After we press enter, we can select our Terraform Cloud organisation and our wor
 ![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-logged-in.png?raw=true "Terraform Modules Library")
 
 ## Github Actions
+
+- https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
+- https://docs.github.com/en/actions/learn-github-actions/variables
+
+We need to set a few secrets in Github Actions to accomplish a few tasks. 
+
+### Github Actions secrets
+
+`ACCESS_TOKEN_GITHUB`: A Personal Git Access Toke to publish the Terraform Modules into their own repository
+`TF_API_TOKEN`: To Authenticate against Terraform Cloud
+
+### Github Actions variables
+
+`REBUILD_CONTAINER_IMAGE`: Set to true or false to rebuild the container image, only needed when you make changes to the Dockerfile
+
+### Pipeline
 
 ## run.sh
