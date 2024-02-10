@@ -2,11 +2,13 @@
 
 This repository forms the basis of my own personal implimentation of a Terraform Modules Library.
 
-It's made up of pre-coded modules to get you started quickly.
+Your Developer Environment is driven by DevContainers, and all the dependencies are installed for you. You can have a look at the `Dockerfile`
 
-It also uses tools, such as TFEnv, Terraform Docs, Linters, VSCode's Dev / Remote containers and many more to provide effectively a Terraform / DevOps engineer development lab to develop and test Terraform Modules.
+The container works on AMD64, Intel and ARM64 architectures. 
 
-You are most welcome and in fact encouraged to contribute back to this repository.
+It also uses tools, such as TFEnv, TFSec, Checkov, Terraform Docs, Linters, VSCode's Dev / Remote containers and many more to provide effectively a Terraform / DevOps engineer's development lab to develop and test Terraform Modules.
+
+This project is affectively a QA / Test / Development project for your Terraform Modules, once you create a `.module-version` file in your modules, and you create the module's repository, the modules will be published to it's own repository.
 
 ![Terraform Modules Library](images/009-owl.png?raw=true "Terraform Modules Library")
 
