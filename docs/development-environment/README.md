@@ -1,5 +1,11 @@
 # Develppment Environment
 
+Start Coding in Seconds.
+
+Complete, All-in-Code Terraform Developer Environment, ready to use in seconds.
+
+Typically, engineers are responsible for setting up their developer environment when they join a team. Development environment setup can take a day or a week, depending on the quality of the documentation. Using DevContainers we can automate the entire process. Helpful commands will format and lint your code and protect you from leaking credentials.
+
 The Terraform Modules Librabry's main purpose is to help you develop Terraform with ease and excellence. To do that it makes use of Dev Containers.
 
 You can Develop locally, using VSCode and Remotely (in a browser window) using Github Codespaces.
@@ -174,7 +180,7 @@ After we press enter, we can select our Terraform Cloud organisation and our wor
 - https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
 - https://docs.github.com/en/actions/learn-github-actions/variables
 
-We need to set a few secrets in Github Actions to accomplish a few tasks. 
+We need to set a few secrets in Github Actions to accomplish a few tasks.
 
 ### Github Actions secrets
 
@@ -187,4 +193,60 @@ We need to set a few secrets in Github Actions to accomplish a few tasks.
 
 ### Pipeline
 
+The Github Actions pipeline has the following jobs
+- build-and-publish-latest
+- run-run-dot-sh
+- terraform-plan-on-tfc
+
+#### build-and-publish-latest
+
+Builds and Publish to Github Container Registry the Dockerfile. The container image is used for the subsequint jobs to run their tasks in, this means that the DevContainer is exactly what the Pipeline runs in, making this workflow extremely consistent, because what you get in the DevContainer is exactly what the build agent will get.
+
+#### run-run-dot-sh
+
+run.sh is a combination of commands driven by the Makefile. Thus you need to look into the Makefile to see what those commands actually do. I've tried to keep it simple so that it can be extended fairly easily by most people.
+
+```bash
+#!/bin/bash -e
+
+echo "Simulate Pipeline"
+
+echo "pre-commit run -a"
+pre-commit run -a
+
+echo "make clean"
+make clean
+
+echo "make init-all"
+make init-all
+
+echo "make tfsec"
+make tfsec
+
+echo "make checkov"
+make checkov
+
+echo "make format"
+make format
+
+echo "make lint"
+make lint
+
+echo "make tflint"
+make tflint
+
+echo "make validate"
+make validate
+
+echo "make docs"
+make docs
+
+# echo "make plan-all"
+# make plan-all
+```
+
 ## run.sh
+
+run.sh should be run frequintly, even before you commit your code. It will fix line endings, trailing white space, check for AWS key pairs and private keys. In addition it will do Terraform format and validate for you, it will initialise all your modules, and run TFSec and Checkov on your code.
+
+run.sh will run in the pipeline as well, meaning if it fails your PR cannot be merged. run.sh will run a battery of tests, scanners and linters on your code.

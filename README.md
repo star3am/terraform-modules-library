@@ -33,6 +33,7 @@ This repository consists basically of 3 topics.
 - VSCode Local Dev
 - Github Codespaces Remote Dev
 - Github Actions
+- Github Secrets and Variables
 - run.sh
 
 2. Governance and Compliance
@@ -48,6 +49,7 @@ This repository consists basically of 3 topics.
 
 - Modules and Patterns
 - Versioning with SemVer
+- Module Promotion: Monorepo -> Multirepos -> Terraform Cloud Private Registry
 - Terraform Cloud Private Module Registry
 
 ## Features
@@ -129,12 +131,12 @@ See screenshot below:
 The Github action will publish in the following name convention for example:
 
 ```
-aws/module/debug -> terraform-aws-dbug-module
-azure/module/resource-group -> terraform-azure-resource-group-module
+aws/module/debug -> terraform-aws-dbug
+azure/module/resource-group -> terraform-azure-resource-group
 ```
 and so on...
 
-3. Create the modules own repository, for example, if your module is in `aws/module/debug` you will create the following github repository `terraform-aws-dbug-module` see above.
+3. Create the modules own repository, for example, if your module is in `aws/module/terraform-aws-debug` you will create the following github repository `terraform-aws-dbug` see above.
 
 ![Terraform Modules Library](images/aws-modules-debug-repository.png?raw=true "Terraform Modules Library")
 
