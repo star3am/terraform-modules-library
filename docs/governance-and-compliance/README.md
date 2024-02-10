@@ -89,18 +89,18 @@ tfsec uses static analysis of your terraform code to spot potential misconfigura
 
 Features
 ☁️ Checks for misconfigurations across all major (and some minor) cloud providers
-⛔ Hundreds of built-in rules
-🪆 Scans modules (local and remote)
-➕ Evaluates HCL expressions as well as literal values
-↪️ Evaluates Terraform functions e.g. concat()
-🔗 Evaluates relationships between Terraform resources
-🧰 Compatible with the Terraform CDK
-🙅 Applies (and embellishes) user-defined Rego policies
-📃 Supports multiple output formats: lovely (default), JSON, SARIF, CSV, CheckStyle, JUnit, text, Gif.
-🛠️ Configurable (via CLI flags and/or config file)
-⚡ Very fast, capable of quickly scanning huge repositories
-🔌 Plugins for popular IDEs available (JetBrains, VSCode and Vim)
-🏡 Community-driven - come and chat with us on Slack!
+- ⛔ Hundreds of built-in rules
+- 🪆 Scans modules (local and remote)
+- ➕ Evaluates HCL expressions as well as literal values
+- ↪️ Evaluates Terraform functions e.g. concat()
+- 🔗 Evaluates relationships between Terraform resources
+- 🧰 Compatible with the Terraform CDK
+- 🙅 Applies (and embellishes) user-defined Rego policies
+- 📃 Supports multiple output formats: lovely (default), JSON, SARIF, CSV, CheckStyle, JUnit, text, Gif.
+- 🛠️ Configurable (via CLI flags and/or config file)
+- ⚡ Very fast, capable of quickly scanning huge repositories
+- 🔌 Plugins for popular IDEs available (JetBrains, VSCode and Vim)
+- 🏡 Community-driven - come and chat with us on Slack!
 
 ### Checkov
 
