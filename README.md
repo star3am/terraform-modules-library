@@ -36,14 +36,14 @@ This repository consists basically of 3 topics.
 - [Github Secrets and Variables](docs/development-environment/#github-secrets-and-variables)
 - [run.sh](docs/development-environment/#run-sh)
 
-2. [Governance and Compliance](docs/governance-and-complaince/#governance-and-compliance)
+2. [Governance and Compliance](docs/governance-and-compliance/#governance-and-compliance)
 
-- [Pre-Commit](docs/governance-and-complaince/#pre-commit)
-- [TFSec and Checkov](docs/governance-and-complaince/#tfsec-and-checkov)
-- [Terraform fmt and validate](docs/governance-and-complaince/#terraform-fmt-and-validate)
-- [Linters](docs/governance-and-complaince/#linters)
-- [Terraform docs](docs/governance-and-complaince/#terraform-docs)
-- [Terraform Cloud](docs/governance-and-complaince/#terraform-cloud)
+- [Pre-Commit](docs/governance-and-compliance/#pre-commit)
+- [TFSec and Checkov](docs/governance-and-compliance/#tfsec-and-checkov)
+- [Terraform fmt and validate](docs/governance-and-compliance/#terraform-fmt-and-validate)
+- [Linters](docs/governance-and-compliance/#linters)
+- [Terraform docs](docs/governance-and-compliance/#terraform-docs)
+- [Terraform Cloud](docs/governance-and-compliance/#terraform-cloud)
 
 3. [Terraform Modules and Patterns Library](docs/terraform-modules-and-patterns-library/#terraform-modules-and-patterns-library)
 
@@ -90,95 +90,6 @@ This repository uses some best practice tools to help us with our modules. Tools
 - Terraform docs: Create README.md files for each Terraform Module on the fly, generated from your code
 
 - Terraform Plan: Using Terragrunt we run a plan on all modules
-
-## Module and Pattern Publishing
-
-You can think of this repository as your library of modules and patterns. Although you can work on each module and pattern seperately using their own repository, you'd have to duplicate many things, for example the devcontainer, the pre-commit rules and so on.
-
-:bulb: Your Terraform module names are important and should be in the format of `terraform-<PROVIDER>-<NAME>` Examples: terraform-google-vault or terraform-aws-ec2-instance.
-
-See: https://developer.hashicorp.com/terraform/registry/modules/publish
-
-For that reason, we've chosen a Monorepo.
-
-The publishing mechanism works as follows:
-
-Terraform Modules Library -> Modules Own Gihub Repository - Terraform Cloud Private Registry
-
-1. You code and commit and test your modules in this repo.
-
-![Terraform Modules Library](images/terraform-modules-library-repository-codespace-editor.png?raw=true "Terraform Modules Library")
-
-2. Once your module is ready, you create a `.module-version` file in the module's directory.
-
-![Terraform Modules Library](images/terraform-modules-library-aws-modules-debug-module-version-file.png?raw=true "Terraform Modules Library")
-
-The Github Actions pipeline will run and detect a `.module-version` file and publish the module to it's own repository.
-
-:bulb: Note for the module to be published you need a Personal Access Token with repository rights and this should be added in your repository Github Actions Secrets as:
-
-```
-- name: Push Modules and Patterns Upstream
-  run: make push-modules-and-patterns-upstream
-  env:
-    ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
-```
-
-See screenshot below:
-
-![Terraform Modules Library](images/terraform-modules-library-repository-secrets.png?raw=true "Terraform Modules Library")
-
-The Github action will publish in the following name convention for example:
-
-```
-aws/module/debug -> terraform-aws-dbug
-azure/module/resource-group -> terraform-azure-resource-group
-```
-and so on...
-
-3. Create the modules own repository, for example, if your module is in `aws/module/terraform-aws-debug` you will create the following github repository `terraform-aws-dbug` see above.
-
-![Terraform Modules Library](images/aws-modules-debug-repository.png?raw=true "Terraform Modules Library")
-
-4. Add the module in Terraform Cloud, and everything after that is Automated.
-
-![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module.png?raw=true "Terraform Modules Library")
-
-![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-connect-to-vcs.png?raw=true "Terraform Modules Library")
-
-![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-select-repository.png?raw=true "Terraform Modules Library")
-
-![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module.png?raw=true "Terraform Modules Library")
-
-![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module-wait-to-become-ready.png?raw=true "Terraform Modules Library")
-
-![Terraform Modules Library](images/terraform-cloud-registry-publish-new-module-add-module-is-ready.png?raw=true "Terraform Modules Library")
-
-This repository has modules and patterns in the following derectories as demostrated below.
-
-```
-.
-├── aws
-│   ├── modules
-│   │   └── terraform-aws-debug
-│   └── patterns
-│       ├── terraform-aws-multiple-ec2-vms
-│       ├── terraform-aws-multiple-ec2-vms-behind-elb
-│       └── terraform-aws-single-ec2-vm
-├── azure
-│   ├── modules
-│   │   ├── terraform-azure-debug
-│   │   └── terraform-azure-resource-group
-│   └── patterns
-├── custom
-│   ├── modules
-│   │   └── terraform-custom-debug
-│   └── patterns
-├── gcp
-│   ├── modules
-│   │   └── terraform-gcp-debug
-│   └── patterns
-```
 
 ## Getting started
 
