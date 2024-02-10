@@ -6,7 +6,7 @@ On a high level this project can be visualised as the following diagram
 
 This repository consists basically of 3 topics.
 
-1. [Develppment Environment](development-environment/#development-environment) 
+1. [Develppment Environment](development-environment/#development-environment)
 
 - [Dev Containers](development-environment/#dev-containers)
 - [Docker](development-environment/#docker)

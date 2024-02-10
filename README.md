@@ -26,7 +26,7 @@ A quick video walk through demo of this solution
 
 This repository consists basically of 3 topics.
 
-1. [Develppment Environment](docs/development-environment/#development-environment) 
+1. [Develppment Environment](docs/development-environment/#development-environment)
 
 - [Dev Containers](docs/development-environment/#dev-containers)
 - [Docker](docs/development-environment/#docker)
