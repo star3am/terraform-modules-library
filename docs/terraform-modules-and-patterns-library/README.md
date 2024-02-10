@@ -6,6 +6,37 @@ The Central Terraform Modules Library that accelerates your IaC journey.
 
 Typically, Terraform Modules and Patterns have a lot of duplication, consider, pre-commit rules, pipelines, linters, config files, README, Dockerfiles etc. This project aims to create a solid foundation for your Terraform Modules and Patterns. A QA environment built with Automation, Compliance and Standard Developer Environments from the Development stage right through to Terraform Cloud.
 
+You can access your Modules in a few ways
+
+To use a Module from this repository, usually for Testing / QA / Development purposes, use the following in your Terraform Module Source
+
+```
+module "debug" {
+  source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/terraform-aws-debug?ref=main"
+  ...
+}
+```
+
+To use a Module from it's own repository, after it's been published, use the following in your Terraform Module Source
+
+```
+module "debug" {
+  source = "git::git@github.com:star3am/terraform-aws-debug.git?ref=1.0.3"
+  ...
+}
+```
+
+And finally to use the Module from your Terraform Cloud Private Module Registry use following in your Terraform Module Source
+
+```
+module "debug" {
+  source  = "app.terraform.io/nolan/debug/aws"
+  version = "1.0.3"
+}
+```
+
+You can read more about Terraform Module Sources here: https://developer.hashicorp.com/terraform/language/modules/sources
+
 ## Modules and Patterns
 
 - https://developer.hashicorp.com/terraform/language/modules

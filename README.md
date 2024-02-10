@@ -4,7 +4,7 @@ This repository forms the basis of my own personal implimentation of a Terraform
 
 Your Developer Environment is driven by DevContainers, and all the dependencies are installed for you. You can have a look at the `Dockerfile`
 
-The container works on AMD64, Intel and ARM64 architectures. 
+The container works on AMD64, Intel and ARM64 architectures.
 
 It also uses tools, such as TFEnv, TFSec, Checkov, Terraform Docs, Linters, VSCode's Dev / Remote containers and many more to provide effectively a Terraform / DevOps engineer's development lab to develop and test Terraform Modules.
 
@@ -192,3 +192,9 @@ I try to avoid code duplication and as a small team, to avoid this developers co
 ## Thanks!
 
 Many thanks goes to the team at Gruntwork https://gruntwork.io/ for their amazing effort and for selflessly sharing their code in the great spirit of Open Source. In fact https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example inspired this repo and set the foundation for this repo.
+
+## Links
+
+- https://www.hashicorp.com/blog/terraform-mono-repo-vs-multi-repo-the-great-debate
+- https://developer.hashicorp.com/terraform/language/modules/sources
+- https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example
