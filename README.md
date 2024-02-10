@@ -198,3 +198,6 @@ Many thanks goes to the team at Gruntwork https://gruntwork.io/ for their amazin
 - https://www.hashicorp.com/blog/terraform-mono-repo-vs-multi-repo-the-great-debate
 - https://developer.hashicorp.com/terraform/language/modules/sources
 - https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example
+- https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577
+- https://hashiqube.com
+- https://www.linkedin.com/in/riaannolan/
