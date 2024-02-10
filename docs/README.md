@@ -16,14 +16,14 @@ This repository consists basically of 3 topics.
 - [Github Secrets and Variables](development-environment/#github-secrets-and-variables)
 - [run.sh](development-environment/#run-sh)
 
-2. [Governance and Compliance](governance-and-complaince/#governance-and-complaince)
+2. [Governance and Compliance](governance-and-compliance/#governance-and-complaince)
 
-- [Pre-Commit](governance-and-complaince/#pre-commit)
-- [TFSec and Checkov](governance-and-complaince/#tfsec-and-checkov)
-- [Terraform fmt and validate](governance-and-complaince/#terraform-fmt-and-validate)
-- [Linters](governance-and-complaince/#linters)
-- [Terraform docs](governance-and-complaince/#terraform-docs)
-- [Terraform Cloud](governance-and-complaince/#terraform-cloud)
+- [Pre-Commit](governance-and-compliance/#pre-commit)
+- [TFSec and Checkov](governance-and-compliance/#tfsec-and-checkov)
+- [Terraform fmt and validate](governance-and-compliance/#terraform-fmt-and-validate)
+- [Linters](governance-and-compliance/#linters)
+- [Terraform docs](governance-and-compliance/#terraform-docs)
+- [Terraform Cloud](governance-and-compliance/#terraform-cloud)
 
 3. [Terraform Modules and Patterns Library](terraform-modules-and-patterns-library/#terraform-modules-and-patterns-library)
 
