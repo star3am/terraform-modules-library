@@ -10,6 +10,12 @@ You are most welcome and in fact encouraged to contribute back to this repositor
 
 ![Terraform Modules Library](images/009-owl.png?raw=true "Terraform Modules Library")
 
+## Diagram
+
+On a high level this project can be visualised as the following diagram
+
+![Terraform Modules Library](images/terraform-modules-library.drawio.png?raw=true "Terraform Modules Library")
+
 ## Demo
 
 A quick video walk through demo of this solution

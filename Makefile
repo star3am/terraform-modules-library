@@ -150,6 +150,11 @@ checkov: ## Checkov all terraform modules
 		checkov -d ./ --skip-path examples; \
 		cd ../../../; \
 	done
+# checkov:skip:CKV2_GHA_1:Ensure top-level permissions are not set to write-all
+# checkov:skip:CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
+# checkov:skip:CKV_DOCKER_9:Ensure that APT isn't used
+# checkov:skip:CKV_DOCKER_4:Ensure that certificate validation isn't disabled with the pip '--trusted-host' option
+	checkov -d ./ --skip-check CKV2_GHA_1 --skip-check CKV_DOCKER_9 --skip-check CKV_DOCKER_2 --skip-check CKV_DOCKER_4 --skip-check CKV2_DOCKER_4; \
 
 .PHONY: clean
 clean: ## Remove the .terragrunt-cache directories
