@@ -16,7 +16,7 @@ This repository consists basically of 3 topics.
 - [Github Secrets and Variables](development-environment/#github-secrets-and-variables)
 - [run.sh](development-environment/#run-sh)
 
-2. [Governance and Compliance](governance-and-complaince/#)
+2. [Governance and Compliance](governance-and-complaince/#governance-and-complaince)
 
 - [Pre-Commit](governance-and-complaince/#pre-commit)
 - [TFSec and Checkov](governance-and-complaince/#tfsec-and-checkov)
@@ -29,7 +29,7 @@ This repository consists basically of 3 topics.
 
 - [Modules and Patterns](terraform-modules-and-patterns-library/#modules-and-patterns)
 - [Versioning with SemVer](terraform-modules-and-patterns-library/#versioning-with-semver)
-- [Module Promotion: Monorepo -> Multirepos -> Terraform Cloud Private Registry](terraform-modules-and-patterns-library/##module-promotion-monorepo---multirepos---terraform-cloud-private-registry)
+- [Module Promotion: Monorepo -> Multirepos -> Terraform Cloud Private Registry](terraform-modules-and-patterns-library/#module-promotion-monorepo---multirepos---terraform-cloud-private-registry)
 - [Terraform Cloud Private Module Registry](terraform-modules-and-patterns-library/#terraform-cloud-private-module-registry)
 
 ## HashiTalks 2024

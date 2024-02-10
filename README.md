@@ -26,31 +26,31 @@ A quick video walk through demo of this solution
 
 This repository consists basically of 3 topics.
 
-1. Develppment Environment
+1. [Develppment Environment](docs/development-environment/#development-environment) 
 
-- Dev Containers
-- Docker
-- VSCode Local Dev
-- Github Codespaces Remote Dev
-- Github Actions
-- Github Secrets and Variables
-- run.sh
+- [Dev Containers](docs/development-environment/#dev-containers)
+- [Docker](docs/development-environment/#docker)
+- [VSCode Local Dev](docs/development-environment/#vscode-local-dev)
+- [Github Codespaces Remote Dev](docs/development-environment/#github-codespaces-remote-dev)
+- [Github Actions](docs/development-environment/#github-actions)
+- [Github Secrets and Variables](docs/development-environment/#github-secrets-and-variables)
+- [run.sh](docs/development-environment/#run-sh)
 
-2. Governance and Compliance
+2. [Governance and Compliance](docs/governance-and-complaince/#governance-and-compliance)
 
-- Pre-Commit
-- TFSec and Checkov
-- Terraform fmt and validate
-- Linters
-- Terraform docs
-- Terraform Cloud
+- [Pre-Commit](docs/governance-and-complaince/#pre-commit)
+- [TFSec and Checkov](docs/governance-and-complaince/#tfsec-and-checkov)
+- [Terraform fmt and validate](docs/governance-and-complaince/#terraform-fmt-and-validate)
+- [Linters](docs/governance-and-complaince/#linters)
+- [Terraform docs](docs/governance-and-complaince/#terraform-docs)
+- [Terraform Cloud](docs/governance-and-complaince/#terraform-cloud)
 
-3. Terraform Modules and Patterns Library
+3. [Terraform Modules and Patterns Library](docs/terraform-modules-and-patterns-library/#terraform-modules-and-patterns-library)
 
-- Modules and Patterns
-- Versioning with SemVer
-- Module Promotion: Monorepo -> Multirepos -> Terraform Cloud Private Registry
-- Terraform Cloud Private Module Registry
+- [Modules and Patterns](docs/terraform-modules-and-patterns-library/#modules-and-patterns)
+- [Versioning with SemVer](docs/terraform-modules-and-patterns-library/#versioning-with-semver)
+- [Module Promotion: Monorepo -> Multirepos -> Terraform Cloud Private Registry](docs/terraform-modules-and-patterns-library/#module-promotion-monorepo---multirepos---terraform-cloud-private-registry)
+- [Terraform Cloud Private Module Registry](docs/terraform-modules-and-patterns-library/#terraform-cloud-private-module-registry)
 
 ## Features
 
