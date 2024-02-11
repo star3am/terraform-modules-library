@@ -2,7 +2,7 @@
 
 On a high level this project can be visualised as the following diagram
 
-![Terraform Modules Library](../images/terraform-modules-library.drawio.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/terraform-modules-library.drawio.png?raw=true "Terraform Modules Library")
 
 This repository consists basically of 3 topics.
 
