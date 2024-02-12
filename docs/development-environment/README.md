@@ -33,21 +33,21 @@ To be able to take advantage of Dev Containers, you need Docker installed. You c
 :bulb: Let's look at some Screenshots of Opening your project
 
 In VSCode, click File -> Open Folder and navigate to this project
-![VSCode open repository folder](../../images/vscode-open-repository-folder.png?raw=true "VSCode open repository folder")
+![VSCode open repository folder](/images/vscode-open-repository-folder.png?raw=true "VSCode open repository folder")
 
 If you have installed the Devcontainer Extension in the previous step, you'd see a Notification, bottom Right.
 
 __Folder contains a Dev Container configuration file. Reopen folder to develop in a container__ and click `Reopen in Container`
 
-![VSCode open repository folder open in devcontainer](../../images/vscode-open-repository-folder-open-in-devcontainer.png?raw=true "VSCode open repository folder open in devcontainer")
+![VSCode open repository folder open in devcontainer](/images/vscode-open-repository-folder-open-in-devcontainer.png?raw=true "VSCode open repository folder open in devcontainer")
 
 You will see the Docker Build log bottom right and once done, you will see the files of the project in VSCode.
 
-![VSCode open repository folder open in devcontainer docker build log](../../images/vscode-open-repository-folder-open-in-devcontainer-build-log.png?raw=true "VSCode open repository folder open in devcontainer docker build log")
+![VSCode open repository folder open in devcontainer docker build log](/images/vscode-open-repository-folder-open-in-devcontainer-build-log.png?raw=true "VSCode open repository folder open in devcontainer docker build log")
 
 Now you can open a new Terminal. This will launch a new terminal inside the container, you will note that Terraform, Terragrunt and all the tools this project needs has already been installed for you.
 
-![VSCode open repository folder open in devcontainer new Terminal](../../images/vscode-open-repository-folder-open-in-devcontainer-new-terminal.png?raw=true "VSCode open repository folder open in devcontainer new Terminal")
+![VSCode open repository folder open in devcontainer new Terminal](/images/vscode-open-repository-folder-open-in-devcontainer-new-terminal.png?raw=true "VSCode open repository folder open in devcontainer new Terminal")
 
 ## Github Codespaces Remote Dev
 
@@ -82,17 +82,17 @@ Reasons for choosing to work in a codespace include:
 
 To get started head on over to https://github.com/star3am/terraform-modules-library
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-repository.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-repository.png?raw=true "Terraform Modules Library")
 
 Now you can either fork or clone Terraform Modules Library to your own Github account.
 
 To fork it, simply click the fork button and complete the steps.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-repository-fork.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-repository-fork.png?raw=true "Terraform Modules Library")
 
 To clone it, simply click on the click on the code button and clone it locally
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-repository-clone.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-repository-clone.png?raw=true "Terraform Modules Library")
 
 ### Launch Codespace
 
@@ -100,15 +100,15 @@ Now that you have cloned or forked Terraform Modules Library, let's launch our C
 
 To do this you can click on the code button and then click on Create Codespace on main
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-create-codespace.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-create-codespace.png?raw=true "Terraform Modules Library")
 
 This will build the Dockerfile to create the Codespace environment for you. The Dockerfile is compatible with Amd64, Intel and Arm64 Architectures.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-build-codespace.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-build-codespace.png?raw=true "Terraform Modules Library")
 
 After the build your Codespace environement should be created and ready to use.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace.png?raw=true "Terraform Modules Library")
 
 ### Terraform Cloud Integration
 
@@ -131,47 +131,47 @@ Because we installed the HashiCorp Terraform Extension via our Devcontainer.json
 ```
 In order to access Terraform Cloud and our workspaces, we need to Authenticate, so let's go through that process now.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-login.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-login.png?raw=true "Terraform Modules Library")
 
 Click on the Login to Terraform Cloud button. You will be asked to approve opening Terraform Cloud
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-login-extension-wants-to-sign-in-enter-token-open-tfc.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-login-extension-wants-to-sign-in-enter-token-open-tfc.png?raw=true "Terraform Modules Library")
 
 You will be asked whether you want to use an existing Token or generate a new on on Terraform Cloud, I am goin to chose to generate a new Token for this example.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-login-extension-wants-to-sign-in-enter-token.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-login-extension-wants-to-sign-in-enter-token.png?raw=true "Terraform Modules Library")
 
 You will be asked to confirm that the extension wants to sign in using Terraform Cloud.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-login-extension-wants-to-sign-in.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-login-extension-wants-to-sign-in.png?raw=true "Terraform Modules Library")
 
 A new browser window will open the Terraform Cloud Login window.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-login-to-terraform-cloud.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-login-to-terraform-cloud.png?raw=true "Terraform Modules Library")
 
 I am going to sign in using my HCP Account and Select Sign in with Github.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-login-to-terraform-cloud-using-github.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-login-to-terraform-cloud-using-github.png?raw=true "Terraform Modules Library")
 
 After successfully signing into Terraform Cloud I will be directed to the Tokens page, where I will generate a new Token to use with my Codespace environment.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-tokens.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-tokens.png?raw=true "Terraform Modules Library")
 
 Let's click on Create API Token now. I will generate a new Token and Give it a descriptive name. Because this is a Demo, I will set my Token TTL (Time To Live) for only 7 days, after which, it will be expired.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-tokens-create-api-token.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-tokens-create-api-token.png?raw=true "Terraform Modules Library")
 
 Your new token will now be displayed, let's copy that and head back over to our Codespace Window
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-tokens-api-token.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-tokens-api-token.png?raw=true "Terraform Modules Library")
 
 Now we can paste our token into the given field for an existing token
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-paste-api-token.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-paste-api-token.png?raw=true "Terraform Modules Library")
 
 After we press enter, we can select our Terraform Cloud organisation and our workspaces will now be displayed.
 
-![Terraform Modules Library](../../images/github-terraform-modules-library-codespace-terraform-cloud-logged-in.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/github-terraform-modules-library-codespace-terraform-cloud-logged-in.png?raw=true "Terraform Modules Library")
 
 ## Github Actions
 

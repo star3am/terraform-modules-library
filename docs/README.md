@@ -2,7 +2,7 @@
 
 On a high level this project can be visualised as the following diagram
 
-![Terraform Modules Library](../images/terraform-modules-library.drawio.png?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/terraform-modules-library.drawio.png?raw=true "Terraform Modules Library")
 
 This repository consists basically of 3 topics.
 
@@ -36,22 +36,22 @@ This repository consists basically of 3 topics.
 
 A Top Gun Terraform Development Environment by HashiCorp Ambassador Riaan Nolan
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_1.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_1.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_2.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_2.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_3.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_3.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_4.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_4.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_5.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_5.jpg?raw=true "Terraform Modules Library")
 
 ![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_6.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_7.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_7.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_8.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_8.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_9.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_9.jpg?raw=true "Terraform Modules Library")
 
-![Terraform Modules Library](../images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_10.jpg?raw=true "Terraform Modules Library")
+![Terraform Modules Library](/images/HashiTalks2024-RiaanNolan-TopGunTerraformDevelopmentEnvironment_10.jpg?raw=true "Terraform Modules Library")
