@@ -59,7 +59,7 @@ resource "aws_security_group" "standard_mssql_security_group" {
 }
 
 module "standard_mssql_db" {
-  source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/terraform-aws-rds?ref=main"
+  source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-rds?ref=main"
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash
   #checkov:skip=CKV2_AWS_5: Ensure that Security Groups are attached to another resource
 
@@ -110,6 +110,5 @@ module "standard_mssql_db" {
     update = "60m"
     delete = "90m"
   }
-
 
 }
