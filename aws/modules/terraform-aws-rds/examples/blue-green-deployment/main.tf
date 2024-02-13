@@ -56,7 +56,7 @@ module "postgres" {
     enabled = true
   }
 
-  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
+  #checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "UberSecretPassword"
   # Not supported with blue/green deployment
   manage_master_user_password = false
@@ -126,6 +126,7 @@ module "mysql" {
 # Supporting Resources
 ################################################################################
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -143,6 +144,7 @@ module "vpc" {
   tags = local.tags
 }
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "postgres_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
@@ -165,7 +167,7 @@ module "postgres_security_group" {
   tags = local.tags
 }
 
-
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "mysql_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"

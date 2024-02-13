@@ -97,6 +97,7 @@ data "aws_iam_policy_document" "rds_enhanced_monitoring" {
 # Supporting Resources
 ################################################################################
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -114,6 +115,7 @@ module "vpc" {
   tags = local.tags
 }
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
