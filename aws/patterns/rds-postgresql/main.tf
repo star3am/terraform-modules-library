@@ -70,7 +70,7 @@ resource "aws_db_parameter_group" "standard_pg_parameters" {
 }
 
 module "standard_pg_db" {
-  source = "git::git@github.com:star3am/terraform-modules-library.git//aws/modules/terraform-aws-rds?ref=main"
+  source = "git::https@github.com:star3am/terraform-modules-library.git//aws/modules/terraform-aws-rds?ref=main"
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash
   #checkov:skip=CKV2_AWS_5: Ensure that Security Groups are attached to another resource
 
