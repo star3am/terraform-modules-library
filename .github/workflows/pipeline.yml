@@ -156,3 +156,48 @@ jobs:
           workspace: "terraform-modules-library"
           configuration_version: ${{ steps.custom-modules-terraform-custom-debug-plan-upload.outputs.configuration_version_id }}
           plan_only: true
+
+  terraform-plan-apply-on-tfc:
+    needs: terraform-plan-on-tfc
+    if: |
+      always() &&
+      (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped')
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library:latest
+      options: --user 1001
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Upload Configuration aws patterns CONFIG UPLOAD
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+        id: aws-patterns-config-upload
+        with:
+          workspace: "terraform-modules-library"
+          directory: "./aws/patterns"
+          speculative: false
+
+      - name: Create Plan Run aws patterns PLAN
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+        id: aws-patterns-plan-run
+        with:
+          workspace: "terraform-modules-library"
+          configuration_version: ${{ steps.aws-patterns-config-upload.outputs.configuration_version_id }}
+          plan_only: true
+
+      - name: Create Apply Run aws patterns APPLY
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+        id: aws-patterns-apply-run
+        with:
+          workspace: "terraform-modules-library"
+          configuration_version: ${{ steps.aws-patterns-config-upload.outputs.configuration_version_id }}
+
+      - name: Confirm Apply Run aws patterns APPLY
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.4
+        id: aws-patterns-confirm-apply
+        with:
+          run: ${{ steps.aws-patterns-apply-run.outputs.run_id }}
+          comment: "Confirmed from GitHub Actions CI"
+          configuration_version: ${{ steps.aws-patterns-plan-upload.outputs.configuration_version_id }}
+          plan_only: true
