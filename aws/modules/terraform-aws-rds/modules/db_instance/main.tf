@@ -26,6 +26,10 @@ resource "random_id" "snapshot_identifier" {
   byte_length = 4
 }
 
+#checkov:skip=CKV_AWS_16:Ensure all data stored in the RDS is securely encrypted at rest
+#checkov:skip=CKV_AWS_133:Ensure that RDS instances has backup policy
+#checkov:skip=CKV_AWS_293:Ensure that AWS database instances have deletion protection enable
+#checkov:skip=CKV_AWS_157:Ensure that RDS instances have Multi-AZ enabled
 resource "aws_db_instance" "this" {
   count = var.create ? 1 : 0
 

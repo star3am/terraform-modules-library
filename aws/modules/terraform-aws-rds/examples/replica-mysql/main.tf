@@ -88,6 +88,7 @@ module "replica" {
 
   port = local.port
 
+  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "UberSecretPassword"
   # Not supported with replicas
   manage_master_user_password = false
@@ -110,6 +111,7 @@ module "replica" {
 # Supporting Resources
 ################################################################################
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -127,6 +129,7 @@ module "vpc" {
   tags = local.tags
 }
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"

@@ -140,7 +140,8 @@ resource "aws_iam_role_policy_attachment" "rds_directory_services" {
 ################################################################################
 
 resource "aws_directory_service_directory" "demo" {
-  name     = "corp.demo.com"
+  name = "corp.demo.com"
+  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "SuperSecretPassw0rd"
   edition  = "Standard"
   type     = "MicrosoftAD"

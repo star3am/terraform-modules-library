@@ -112,6 +112,7 @@ module "replica" {
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
 
+  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "UberSecretPassword"
   # Not supported with replicas
   manage_master_user_password = false

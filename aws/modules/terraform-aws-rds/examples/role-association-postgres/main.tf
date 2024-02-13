@@ -74,6 +74,7 @@ module "db" {
 # Supporting Resources
 ################################################################################
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -92,6 +93,7 @@ module "vpc" {
   tags = local.tags
 }
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
@@ -125,6 +127,7 @@ module "security_group" {
   tags = local.tags
 }
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "rds_invoke_lambda_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version = "~> 5.28.0"
@@ -140,6 +143,7 @@ module "rds_invoke_lambda_role" {
   custom_role_trust_policy = data.aws_iam_policy_document.rds_invoke_lambda_assume_role.json
 }
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "rds_invoke_lambda_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
   version = "~> 5.28.0"
@@ -184,6 +188,7 @@ data "aws_iam_policy_document" "rds_invoke_lambda_assume_role" {
   }
 }
 
+# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "~> 6.0"

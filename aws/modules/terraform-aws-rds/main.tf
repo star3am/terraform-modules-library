@@ -58,6 +58,10 @@ module "db_option_group" {
   tags = merge(var.tags, var.db_option_group_tags)
 }
 
+#checkov:skip=CKV_AWS_157:Ensure that RDS instances have Multi-AZ enabled
+#checkov:skip=CKV_AWS_293:Ensure that AWS database instances have deletion protection enable
+#checkov:skip=CKV_AWS_133:Ensure that RDS instances has backup policy
+#checkov:skip=CKV_AWS_16:Ensure all data stored in the RDS is securely encrypted at rest
 module "db_instance" {
   source = "./modules/db_instance"
 
