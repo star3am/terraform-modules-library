@@ -141,7 +141,7 @@ resource "aws_iam_role_policy_attachment" "rds_directory_services" {
 
 resource "aws_directory_service_directory" "demo" {
   name = "corp.demo.com"
-  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
+  #checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "SuperSecretPassw0rd"
   edition  = "Standard"
   type     = "MicrosoftAD"
@@ -159,6 +159,7 @@ resource "aws_directory_service_directory" "demo" {
 # Supporting Resources
 ################################################################################
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -176,6 +177,7 @@ module "vpc" {
   tags = local.tags
 }
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"

@@ -113,7 +113,7 @@ module "replica" {
 # Supporting Resources
 ################################################################################
 
-# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -131,7 +131,7 @@ module "vpc" {
   tags = local.tags
 }
 
-# checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"

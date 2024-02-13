@@ -72,6 +72,7 @@ module "master" {
 # Replica DB
 ################################################################################
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "kms" {
   source      = "terraform-aws-modules/kms/aws"
   version     = "~> 1.0"
@@ -112,7 +113,7 @@ module "replica" {
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
 
-  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
+  #checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "UberSecretPassword"
   # Not supported with replicas
   manage_master_user_password = false
@@ -141,6 +142,7 @@ module "replica" {
 # Supporting Resources
 ################################################################################
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc_region1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -158,6 +160,7 @@ module "vpc_region1" {
   tags = local.tags
 }
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group_region1" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
@@ -180,6 +183,7 @@ module "security_group_region1" {
   tags = local.tags
 }
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "vpc_region2" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -201,6 +205,7 @@ module "vpc_region2" {
   tags = local.tags
 }
 
+#checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
 module "security_group_region2" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"

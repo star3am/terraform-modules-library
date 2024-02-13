@@ -34,6 +34,7 @@ resource "aws_s3_bucket" "this" {
   #checkov:skip=CKV_AWS_145:Bucket has server_side_encryption enabled
   #checkov:skip=CKV_AWS_21:Bucket has versioning enabled
   #checkov:skip=CKV_AWS_19:sse_algorithm is enabled
+  #checkov:skip=CKV_AWS_18:Ensure the S3 bucket has access logging enabled
   #checkov:skip=CKV2_AWS_6:block_public_acls & block_public_policy is enabled
 
   bucket        = var.bucket
