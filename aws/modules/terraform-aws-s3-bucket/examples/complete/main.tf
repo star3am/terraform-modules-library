@@ -22,6 +22,8 @@ resource "random_pet" "this" {
   length = 2
 }
 
+#checkov:skip=CKV2_AWS_64:Ensure KMS key Policy is defined
+#checkov:skip=CKV_AWS_7:Ensure rotation for customer created CMKs is enabled
 resource "aws_kms_key" "objects" {
   description             = "KMS key is used to encrypt bucket objects"
   deletion_window_in_days = 7

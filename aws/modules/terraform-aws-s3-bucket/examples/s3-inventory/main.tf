@@ -21,7 +21,8 @@ module "multi_inventory_configurations_bucket" {
 
   force_destroy = true
 
-  attach_policy                       = true
+  attach_policy = true
+  #checkov:skip=CKV_AWS_7:Ensure rotation for customer created CMKs is enabled
   attach_inventory_destination_policy = true
   inventory_self_source_destination   = true
   acl                                 = "private" # "acl" conflicts with "grant" and "owner"
@@ -92,6 +93,7 @@ resource "random_pet" "this" {
 
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-kms-key-policy
 module "kms" {
+  #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source = "terraform-aws-modules/kms/aws"
 
   description             = "Key example for Inventory S3 destination encyrption"

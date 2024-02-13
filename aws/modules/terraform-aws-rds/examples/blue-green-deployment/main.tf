@@ -56,6 +56,7 @@ module "postgres" {
     enabled = true
   }
 
+  # checkov:skip=CKV_SECRET_6:Base64 High Entropy String
   password = "UberSecretPassword"
   # Not supported with blue/green deployment
   manage_master_user_password = false

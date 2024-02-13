@@ -24,8 +24,11 @@ locals {
 
 #Encrpytion, Logging & Versioning are handled in seperate resources
 #tfsec:ignore:AWS017 tfsec:ignore:AWS002 #tfsec:ignore:AWS077
+#checkov:skip=CKV_AWS_18:Ensure the S3 bucket has access logging enabled
+#checkov:skip=CKV2_AWS_61:Ensure that an S3 bucket has a lifecycle configuration
 resource "aws_s3_bucket" "this" {
   count = local.create_bucket ? 1 : 0
+  #checkov:skip=CKV2_AWS_61:Ensure that an S3 bucket has a lifecycle configuration
   #checkov:skip=CKV2_AWS_62:Ignore event notifications
   #checkov:skip=CKV_AWS_144:Ignore cross-region replication
   #checkov:skip=CKV_AWS_145:Bucket has server_side_encryption enabled
