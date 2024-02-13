@@ -27,7 +27,8 @@ variable "storage_type" {
   default     = null
 }
 
-variable "storage_throughput" {EQ  description = "Storage throughput value for the DB instance. See `notes` for limitations regarding this variable for `gp3`"
+variable "storage_throughput" {
+  description = "Storage throughput value for the DB instance. See `notes` for limitations regarding this variable for `gp3`"
   type        = number
   default     = null
 }
