@@ -164,7 +164,7 @@ jobs:
       (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library:latest
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
       options: --user 1001
 
     steps:
