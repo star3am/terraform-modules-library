@@ -45,7 +45,7 @@ module "logs_bucket" {
 
   control_object_ownership = true
 
-  object_ownership = "BucketOwnerPreferred"
+  # object_ownership = "BucketOwnerPreferred"
 
   expected_bucket_owner = data.aws_caller_identity.current.account_id
 
@@ -85,7 +85,7 @@ module "standard_bucket" {
 
   control_object_ownership = true
 
-  object_ownership = "BucketOwnerPreferred"
+  # object_ownership = "BucketOwnerPreferred"
 
   expected_bucket_owner = data.aws_caller_identity.current.account_id
 
