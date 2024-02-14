@@ -5,21 +5,21 @@ terraform {
 }
 
 module "s3_bucket_standard" {
-  source = "../s3-bucket-standard"
+  source = "github.com/star3am/terraform-modules-library//aws/patterns/s3-bucket-standard?ref=main"
 }
 
 module "s3_bucket_object_lock" {
-  source = "../s3-bucket-object-lock"
+  source = "github.com/star3am/terraform-modules-library//aws/patterns/s3-bucket-object-lock?ref=main"
 }
 
 module "s3_bucket_glacier_transition" {
-  source = "../s3-bucket-glacier-transition"
+  source = "github.com/star3am/terraform-modules-library//aws/patterns/s3-bucket-glacier-transition?ref=main"
 }
 
 module "rds_postgresql" {
-  source = "../rds-postgresql"
+  source = "github.com/star3am/terraform-modules-library//aws/patterns/rds-postgresql?ref=main"
 }
 
 module "rds_mssql" {
-  source = "../rds-mssql"
+  source = "github.com/star3am/terraform-modules-library//aws/patterns/rds-mssql?ref=main"
 }

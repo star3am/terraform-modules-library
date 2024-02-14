@@ -161,7 +161,7 @@ jobs:
     needs: terraform-plan-on-tfc
     if: |
       always() &&
-      (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped')
+      (needs.terraform-plan-on-tfc.result == 'success' || needs.terraform-plan-on-tfc.result == 'skipped')
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
@@ -175,7 +175,7 @@ jobs:
         id: aws-patterns-config-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./aws/patterns"
+          directory: "./aws/patterns/terraform-test-all-patterns"
           speculative: false
 
       - name: Create Plan Run aws patterns PLAN
