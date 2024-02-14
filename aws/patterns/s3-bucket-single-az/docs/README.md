@@ -2,7 +2,7 @@
 
 The following providers are used by this module:
 
-- <a name="provider_aws"></a> [aws](#provider_aws) (5.33.0)
+- <a name="provider_aws"></a> [aws](#provider_aws) (5.36.0)
 
 ## Modules
 
@@ -20,7 +20,15 @@ No required inputs.
 
 ## Optional Inputs
 
-No optional inputs.
+The following input variables are optional (have default values):
+
+### <a name="input_s3_availability_zone"></a> [s3_availability_zone](#input_s3_availability_zone)
+
+Description: AWS Availability Zone Identifier
+
+Type: `string`
+
+Default: `"apse2-az1"`
 
 ## Outputs
 
