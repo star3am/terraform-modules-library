@@ -8,7 +8,7 @@ locals {
 
 data "aws_caller_identity" "current" {}
 
-data "aws_canonical_user_id" "current" {}
+# data "aws_canonical_user_id" "current" {}
 
 resource "random_string" "this" {
   length  = 5
@@ -25,6 +25,7 @@ resource "aws_kms_key" "bucket_objects_key" {
 }
 
 module "logs_bucket" {
+  # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket?ref=main"
   #checkov:skip=CKV_AWS_18: Ensure the S3 bucket has access logging enabled
   #checkov:skip=CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
@@ -63,6 +64,7 @@ module "logs_bucket" {
 }
 
 module "transition_bucket" {
+  # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket?ref=main"
   #checkov:skip=CKV_AWS_18: Ensure the S3 bucket has access logging enabled
   #checkov:skip=CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration

@@ -119,7 +119,7 @@ tflint:
 tflint-module:
 tflint-module: module-vars
 	$(info --- tflint-module ($(MODULE)))
-	@$(call run_command,tflint $(MODULE))
+	@$(call run_command,tflint --chdir $(MODULE))
 
 .PHONY: validate
 validate: ## Validate all terraform modules

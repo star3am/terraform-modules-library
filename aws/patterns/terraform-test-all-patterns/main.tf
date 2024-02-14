@@ -1,5 +1,9 @@
 # This is here to deploy all patterns together to TF Cloud Workspace
 
+terraform {
+  required_version = "~> 1.0"
+}
+
 module "s3_bucket_standard" {
   source = "../s3-bucket-standard"
 }

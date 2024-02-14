@@ -2,7 +2,7 @@
 
 The following providers are used by this module:
 
-- <a name="provider_aws"></a> [aws](#provider_aws) (5.34.0)
+- <a name="provider_aws"></a> [aws](#provider_aws) (5.36.0)
 
 ## Modules
 

@@ -2,15 +2,15 @@ provider "aws" {
 }
 
 locals {
-  name   = "standard-mssql-${random_string.this.id}"
-  region = var.db_region
+  name = "standard-mssql-${random_string.this.id}"
+  # region = var.db_region
 
-  vpc_cidr = data.aws_vpc.default_vpc.cidr_block
-  vpc_azs  = slice(data.aws_availability_zones.available.names, 0, 3)
+  # vpc_cidr = data.aws_vpc.default_vpc.cidr_block
+  # vpc_azs  = slice(data.aws_availability_zones.available.names, 0, 3)
 
 }
 
-data "aws_caller_identity" "current" {}
+# data "aws_caller_identity" "current" {}
 
 resource "random_string" "this" {
   length  = 5
@@ -18,22 +18,22 @@ resource "random_string" "this" {
   upper   = false
 }
 
-data "aws_availability_zones" "available" {}
+# data "aws_availability_zones" "available" {}
 
 data "aws_vpc" "default_vpc" {
   default = true
 }
 
-data "aws_subnets" "apps_subnets" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default_vpc.id]
-  }
+# data "aws_subnets" "apps_subnets" {
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.default_vpc.id]
+#   }
 
-  tags = {
-    Name = "*-APP-*"
-  }
-}
+#   tags = {
+#     Name = "*-APP-*"
+#   }
+# }
 
 data "aws_subnets" "data_subnets" {
   filter {
@@ -59,6 +59,7 @@ resource "aws_security_group" "standard_mssql_security_group" {
 }
 
 module "standard_mssql_db" {
+  # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-rds?ref=main"
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash
   #checkov:skip=CKV2_AWS_5: Ensure that Security Groups are attached to another resource
