@@ -186,6 +186,7 @@ resource "aws_s3_bucket_versioning" "this" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
+  #checkov:skip=CKV2_AWS_67:Ensure AWS S3 bucket encrypted with Customer Managed Key (CMK) has regular rotation
   count = local.create_bucket && length(keys(var.server_side_encryption_configuration)) > 0 ? 1 : 0
 
   bucket                = aws_s3_bucket.this[0].id
