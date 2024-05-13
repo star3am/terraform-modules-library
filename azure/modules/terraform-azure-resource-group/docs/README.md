@@ -6,7 +6,7 @@ This module creates an empty Resource Group.
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider_azurerm) (3.91.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider_azurerm) (3.103.1)
 
 ## Modules
 

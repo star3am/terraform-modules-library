@@ -60,7 +60,8 @@ push-modules-and-patterns-upstream: ## Push modules and patterns that contains .
 		else \
 		    echo "$$module"; \
 			cd ../../../../; \
-			cp -a $$module/. tmp/$$module/;\
+			echo "rsync -azv --delete $$module/ tmp/$$module/"; \
+			rsync -azv --exclude '.git' --delete $$module/ tmp/$$module/; \
 			cd tmp/$$module; \
 			git config --global user.email "$(GITHUB_REPOSITORY)@github.com"; \
 			git config --global user.name "$(GITHUB_ACTOR)"; \

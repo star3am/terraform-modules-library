@@ -2,9 +2,9 @@
 
 The following providers are used by this module:
 
-- <a name="provider_aws"></a> [aws](#provider_aws) (5.37.0)
+- <a name="provider_aws"></a> [aws](#provider_aws) (5.49.0)
 
-- <a name="provider_random"></a> [random](#provider_random) (3.6.0)
+- <a name="provider_random"></a> [random](#provider_random) (3.6.1)
 
 ## Modules
 
@@ -16,7 +16,7 @@ Source: github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-
 
 Version: main
 
-### <a name="module_transition_bucket"></a> [transition_bucket](#module_transition_bucket)
+### <a name="module_object_lock_bucket"></a> [object_lock_bucket](#module_object_lock_bucket)
 
 Source: github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket
 
