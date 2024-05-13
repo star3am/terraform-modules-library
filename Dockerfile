@@ -41,6 +41,7 @@ nano \
 vim \
 less \
 dos2unix \
+rsync \
 "
 
 # Env vars
