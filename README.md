@@ -14,6 +14,7 @@ This project is affectively a QA / Test / Development project for your Terraform
 
 ## Diagram
 
+
 On a high level this project can be visualised as the following diagram
 
 ![Terraform Modules Library](images/terraform-modules-library.drawio.png?raw=true "Terraform Modules Library")
