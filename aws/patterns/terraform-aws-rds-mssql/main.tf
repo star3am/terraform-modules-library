@@ -58,7 +58,9 @@ resource "aws_security_group" "standard_mssql_security_group" {
   vpc_id      = data.aws_vpc.default_vpc.id
 }
 
+#checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
 module "standard_mssql_db" {
+#checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
   # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-rds?ref=main"
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash

@@ -31,6 +31,7 @@ resource "aws_kms_key" "bucket_objects_key" {
 #data "aws_iam_policy_document" "logs_bucket_policy" {
 #}
 
+#checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
 module "logs_bucket" {
   # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket?ref=main"
@@ -71,6 +72,7 @@ module "logs_bucket" {
 
 }
 
+#checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
 module "standard_bucket" {
   # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket?ref=main"

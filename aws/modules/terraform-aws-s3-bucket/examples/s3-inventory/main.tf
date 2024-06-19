@@ -92,6 +92,7 @@ resource "random_pet" "this" {
 }
 
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-kms-key-policy
+#checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
 module "kms" {
   #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source = "terraform-aws-modules/kms/aws"

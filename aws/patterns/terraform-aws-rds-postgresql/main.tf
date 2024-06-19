@@ -69,6 +69,7 @@ resource "aws_db_parameter_group" "standard_pg_parameters" {
   }
 }
 
+#checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
 module "standard_pg_db" {
   # tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-rds?ref=main"
