@@ -7,6 +7,7 @@
     "set-git-config-line-endings": "git config --global core.autocrlf input",
     "set-git-config-gpg-program": "git config --global --add gpg.program /usr/bin/gpg",
     "add-run-dot-sh-to-path": "ln -s ${containerWorkspaceFolder}/run.sh ~/.local/bin/run.sh",
+    "create-terraform-plugin-cache-dir": "mkdir -p $HOME/.terraform.d/plugin-cache",
     "pre-commit-install": "pre-commit install"
   },
   "customizations": {

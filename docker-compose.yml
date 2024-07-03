@@ -36,7 +36,4 @@ services:
       - TF_LOG
       - TGENV_AUTO_INSTALL=true
       - GPG_TTY=/dev/pts/1
-      # TODO: Below is supposed to cache Terraform plugins, but I get lock contention errors
-      # FIXME: Error: Failed to install provider from shared cache
-      # Error while importing hashicorp/null v3.1.1 from the shared cache directory: the provider cache at .terraform/providers has a copy of registry.terraform.io/hashicorp/null 3.1.1 that doesn't match any of the checksums recorded in the dependency lock file.
-      # - TF_PLUGIN_CACHE_DIR=/home/ubuntu/.terraform.d/plugin-cache
+      - TF_PLUGIN_CACHE_DIR=/home/ubuntu/.terraform.d/plugin-cache
