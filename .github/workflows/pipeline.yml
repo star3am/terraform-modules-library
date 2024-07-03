@@ -162,7 +162,7 @@ jobs:
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: plan-upload
+        id: config-upload
         with:
           workspace: "terraform-modules-library"
           directory: "./aws/patterns/terraform-test-all-patterns"
@@ -173,23 +173,7 @@ jobs:
         id: plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
-          plan_only: true
-
-      - name: Upload Configuration
-        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: plan-upload
-        with:
-          workspace: "terraform-modules-library"
-          directory: "./aws/patterns/terraform-test-all-patterns"
-          speculative: true
-
-      - name: Create Plan Run
-        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: plan-run
-        with:
-          workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.config-upload.outputs.configuration_version_id }}
           plan_only: true
 
   terraform-cli-apply:
