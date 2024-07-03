@@ -131,11 +131,11 @@ jobs:
 
       - name: Terraform init
         run: terraform init -upgrade
-        working-directory: ./aws/modules/terraform-aws-debug
+        working-directory: ./aws/patterns/terraform-test-all-patterns
 
       - name: Terraform plan
         run: terraform plan
-        working-directory: ./aws/modules/terraform-aws-debug
+        working-directory: ./aws/patterns/terraform-test-all-patterns
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -160,37 +160,85 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Upload Configuration aws/modules/terraform-aws-debug
+      - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: aws-modules-terraform-aws-debug-plan-upload
+        id: plan-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./aws/modules/terraform-aws-debug"
+          directory: "./aws/patterns/terraform-test-all-patterns"
           speculative: true
 
-      - name: Create Plan Run aws/modules/debug
+      - name: Create Plan Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: aws-modules-terraform-aws-debug-plan-run
+        id: plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.aws-modules-terraform-aws-debug-plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
           plan_only: true
 
-      - name: Upload Configuration custom/modules/terraform-custom-debug
+      - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: custom-modules-terraform-custom-debug-plan-upload
+        id: plan-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./custom/modules/terraform-custom-debug"
+          directory: "./aws/patterns/terraform-test-all-patterns"
           speculative: true
 
-      - name: Create Plan Run custom/modules/debug
+      - name: Create Plan Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: custom-modules-terraform-custom-debug-plan-run
+        id: plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.custom-modules-terraform-custom-debug-plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
           plan_only: true
+
+  terraform-cli-apply:
+    needs: terraform-cli-plan
+    if: |
+      always() &&
+      (needs.terraform-cli-plan.result == 'success' || needs.terraform-cli-plan.result == 'skipped')
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
+      options: --user 1001
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Terraform version
+        run: terraform -v
+
+      - name: Terraform init
+        run: terraform init -upgrade
+        working-directory: ./aws/patterns/terraform-test-all-patterns
+
+      - name: Terraform plan
+        run: terraform plan
+        working-directory: ./aws/patterns/terraform-test-all-patterns
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+
+      - name: Terraform apply
+        run: terraform apply
+        working-directory: ./aws/patterns/terraform-test-all-patterns
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
 
   terraform-plan-apply-on-tfc:
     needs: terraform-plan-on-tfc
@@ -205,34 +253,34 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Upload Configuration aws patterns CONFIG UPLOAD
+      - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
-        id: aws-patterns-config-upload
+        id: config-upload
         with:
           workspace: "terraform-modules-library"
           directory: "./aws/patterns/terraform-test-all-patterns"
           speculative: false
 
-      - name: Create Plan Run aws patterns PLAN
+      - name: Create Plan Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: aws-patterns-plan-run
+        id: plan-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.aws-patterns-config-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.config-upload.outputs.configuration_version_id }}
           plan_only: true
 
-      - name: Create Apply Run aws patterns APPLY
+      - name: Create Apply Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        id: aws-patterns-apply-run
+        id: apply-run
         with:
           workspace: "terraform-modules-library"
-          configuration_version: ${{ steps.aws-patterns-config-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.config-upload.outputs.configuration_version_id }}
 
-      - name: Confirm Apply Run aws patterns APPLY
+      - name: Confirm Apply Run
         uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.4
-        id: aws-patterns-confirm-apply
+        id: confirm-apply
         with:
-          run: ${{ steps.aws-patterns-apply-run.outputs.run_id }}
+          run: ${{ steps.apply-run.outputs.run_id }}
           comment: "Confirmed from GitHub Actions CI"
-          configuration_version: ${{ steps.aws-patterns-plan-upload.outputs.configuration_version_id }}
+          configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
           plan_only: true
