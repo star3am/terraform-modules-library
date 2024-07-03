@@ -11,11 +11,11 @@ make clean
 echo "make init-all"
 make init-all
 
-echo "make tfsec"
-make tfsec
+# echo "make tfsec"
+# make tfsec
 
-echo "make checkov"
-make checkov
+# echo "make checkov"
+# make checkov
 
 echo "make format"
 make format

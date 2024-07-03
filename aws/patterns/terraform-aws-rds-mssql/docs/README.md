@@ -2,9 +2,9 @@
 
 The following providers are used by this module:
 
-- <a name="provider_aws"></a> [aws](#provider_aws) (5.49.0)
+- <a name="provider_aws"></a> [aws](#provider_aws) (5.56.1)
 
-- <a name="provider_random"></a> [random](#provider_random) (3.6.1)
+- <a name="provider_random"></a> [random](#provider_random) (3.6.2)
 
 ## Modules
 
@@ -50,7 +50,7 @@ No outputs.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.54.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.56.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.6.2 |
 
 ## Modules

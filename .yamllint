@@ -4,6 +4,9 @@ yaml-files:
   - "*.yml"
   - ".yamllint"
 
+ignore:
+  - "*.terraform"
+
 rules:
   ## enforced rules - breaking these rules will fail linting
   ## refer to https://yamllint.readthedocs.io/en/stable/rules.html# for more details

@@ -1,5 +1,5 @@
-#checkov:skip=CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 ---
+# checkov:skip=CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 # https://docs.github.com/en/actions/quickstart
 # hhttps://github.com/marketplace/actions/build-and-publish-docker-image-to-github-container-registry
 name: "Terraform Modules Library Pipeline"
@@ -112,6 +112,40 @@ jobs:
         run: make push-modules-and-patterns-upstream
         env:
           ACCESS_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+
+  terraform-cli-plan:
+    needs: push-modules-and-patterns-upstream
+    if: |
+      always() &&
+      (needs.push-modules-and-patterns-upstream.result == 'success' || needs.push-modules-and-patterns-upstream.result == 'skipped')
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/terraform-modules-library-container:latest
+      options: --user 1001
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Terraform version
+        run: terraform -v
+
+      - name: Terraform init
+        run: terraform init -upgrade
+        working-directory: ./aws/modules/terraform-aws-debug
+
+      - name: Terraform plan
+        run: terraform plan
+        working-directory: ./aws/modules/terraform-aws-debug
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
 
   terraform-plan-on-tfc:
     needs: push-modules-and-patterns-upstream

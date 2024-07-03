@@ -1,3 +1,4 @@
+---
 # https://terraform-docs.io/user-guide/configuration/#options
 
 formatter: "" # this is required
