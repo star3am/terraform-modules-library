@@ -211,7 +211,7 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
 
       - name: Terraform apply
-        run: terraform apply
+        run: terraform apply -auto-approve
         working-directory: ./aws/patterns/terraform-test-all-patterns
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
