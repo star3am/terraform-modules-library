@@ -117,6 +117,7 @@ jobs:
     needs: push-modules-and-patterns-upstream
     if: |
       always() &&
+      (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped') &&
       (needs.push-modules-and-patterns-upstream.result == 'success' || needs.push-modules-and-patterns-upstream.result == 'skipped')
     runs-on: ubuntu-latest
     container:
@@ -151,6 +152,7 @@ jobs:
     needs: push-modules-and-patterns-upstream
     if: |
       always() &&
+      (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped') &&
       (needs.push-modules-and-patterns-upstream.result == 'success' || needs.push-modules-and-patterns-upstream.result == 'skipped')
     runs-on: ubuntu-latest
     container:
@@ -180,6 +182,7 @@ jobs:
     needs: terraform-cli-plan
     if: |
       always() &&
+      (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped') &&
       (needs.terraform-cli-plan.result == 'success' || needs.terraform-cli-plan.result == 'skipped')
     runs-on: ubuntu-latest
     container:
@@ -228,6 +231,7 @@ jobs:
     needs: terraform-plan-on-tfc
     if: |
       always() &&
+      (needs.run-run-dot-sh.result == 'success' || needs.run-run-dot-sh.result == 'skipped') &&
       (needs.terraform-plan-on-tfc.result == 'success' || needs.terraform-plan-on-tfc.result == 'skipped')
     runs-on: ubuntu-latest
     container:

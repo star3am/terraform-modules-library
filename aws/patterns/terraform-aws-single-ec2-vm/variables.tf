@@ -11,16 +11,16 @@ variable "name" {
   }
 }
 
-variable "os_type" {
-  type        = string
-  description = "Operating System to use for the VM. One of 'windows-server-2019' or 'windows-server-2022' or 'amazon-linux-2023' or 'redhat-9.3' or 'redhat-8.8' as the value"
-  default     = "amazon-linux-2023"
+# variable "os_type" {
+#   type        = string
+#   description = "Operating System to use for the VM. One of 'windows-server-2019' or 'windows-server-2022' or 'amazon-linux-2023' or 'redhat-9.3' or 'redhat-8.8' as the value"
+#   default     = "amazon-linux-2023"
 
-  validation {
-    condition     = contains(["windows-server-2019", "windows-server-2022", "amazon-linux-2023", "redhat-9.3", "redhat-8.8"], var.os_type)
-    error_message = "The os_type must be either of windows-server-2019 or windows-server-2022 or amazon-linux-2023 or redhat-9.3 or redhat-8.8 as the value."
-  }
-}
+#   validation {
+#     condition     = contains(["windows-server-2019", "windows-server-2022", "amazon-linux-2023", "redhat-9.3", "redhat-8.8"], var.os_type)
+#     error_message = "The os_type must be either of windows-server-2019 or windows-server-2022 or amazon-linux-2023 or redhat-9.3 or redhat-8.8 as the value."
+#   }
+# }
 
 variable "ami_id" {
   type        = string
