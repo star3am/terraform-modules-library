@@ -4,7 +4,13 @@ No providers.
 
 ## Modules
 
-No modules.
+The following Modules are called:
+
+### <a name="module_aws_debug"></a> [aws_debug](#module_aws_debug)
+
+Source: github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-debug
+
+Version: main
 
 ## Resources
 
