@@ -8,6 +8,8 @@ module "aws_debug" {
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash
   #tflint-ignore: terraform_module_pinned_source
   source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-debug?ref=main"
+
+  # feature = false
 }
 
 # Disable Apply

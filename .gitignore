@@ -44,3 +44,4 @@ terraform.rc
 **tmp**
 
 **/.DS_Store
+**/github_conf
