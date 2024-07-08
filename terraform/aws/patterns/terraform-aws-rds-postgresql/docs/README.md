@@ -12,7 +12,7 @@ The following Modules are called:
 
 ### <a name="module_standard_pg_db"></a> [standard_pg_db](#module_standard_pg_db)
 
-Source: github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-rds
+Source: github.com/star3am/terraform-modules-library//terraform/aws/modules/terraform-aws-rds
 
 Version: main
 

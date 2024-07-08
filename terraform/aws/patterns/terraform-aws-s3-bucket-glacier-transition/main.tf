@@ -28,7 +28,7 @@ resource "aws_kms_key" "bucket_objects_key" {
 module "logs_bucket" {
   #checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
   # tflint-ignore: terraform_module_pinned_source
-  source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket?ref=main"
+  source = "github.com/star3am/terraform-modules-library//terraform/aws/modules/terraform-aws-s3-bucket?ref=main"
   #checkov:skip=CKV_AWS_18: Ensure the S3 bucket has access logging enabled
   #checkov:skip=CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash
@@ -68,7 +68,7 @@ module "logs_bucket" {
 #checkov:skip=CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
 module "transition_bucket" {
   # tflint-ignore: terraform_module_pinned_source
-  source = "github.com/star3am/terraform-modules-library//aws/modules/terraform-aws-s3-bucket?ref=main"
+  source = "github.com/star3am/terraform-modules-library//terraform/aws/modules/terraform-aws-s3-bucket?ref=main"
   #checkov:skip=CKV_AWS_18: Ensure the S3 bucket has access logging enabled
   #checkov:skip=CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
   #checkov:skip=CKV_TF_1: Ensure Terraform module sources use a commit hash
