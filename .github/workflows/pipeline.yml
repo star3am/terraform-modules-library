@@ -132,11 +132,11 @@ jobs:
 
       - name: Terraform init
         run: terraform init -upgrade
-        working-directory: ./aws/patterns/terraform-test-all-patterns
+        working-directory: ./terraform/aws/patterns/terraform-test-all-patterns
 
       - name: Terraform plan
         run: terraform plan
-        working-directory: ./aws/patterns/terraform-test-all-patterns
+        working-directory: ./terraform/aws/patterns/terraform-test-all-patterns
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -167,7 +167,7 @@ jobs:
         id: config-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./aws/patterns/terraform-test-all-patterns"
+          directory: "./terraform/aws/patterns/terraform-test-all-patterns"
           speculative: true
 
       - name: Create Plan Run
@@ -197,11 +197,11 @@ jobs:
 
       - name: Terraform init
         run: terraform init -upgrade
-        working-directory: ./aws/patterns/terraform-test-all-patterns
+        working-directory: ./terraform/aws/patterns/terraform-test-all-patterns
 
       - name: Terraform plan
         run: terraform plan
-        working-directory: ./aws/patterns/terraform-test-all-patterns
+        working-directory: ./terraform/aws/patterns/terraform-test-all-patterns
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -215,7 +215,7 @@ jobs:
 
       - name: Terraform apply
         run: terraform apply -auto-approve
-        working-directory: ./aws/patterns/terraform-test-all-patterns
+        working-directory: ./terraform/aws/patterns/terraform-test-all-patterns
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -246,7 +246,7 @@ jobs:
         id: config-upload
         with:
           workspace: "terraform-modules-library"
-          directory: "./aws/patterns/terraform-test-all-patterns"
+          directory: "./terraform/aws/patterns/terraform-test-all-patterns"
           speculative: false
 
       - name: Create Plan Run
