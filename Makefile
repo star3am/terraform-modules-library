@@ -180,6 +180,7 @@ docs-module: module-vars
 init-all: ## Run `terraform init` for specifc [DIRECTORY]
 	$(info --- init-all ($(DIRECTORY)))
 	@for module in $(MODULES); do \
+		echo Running terraform init on $$module; \
 		cd $$module; \
 		terraform init -upgrade; \
 		cd ../../../../; \
