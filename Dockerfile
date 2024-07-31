@@ -159,6 +159,6 @@ RUN python3 -m pip install --no-cache-dir --quiet --upgrade azure-cli
 
 # pre-commit https://pre-commit.com/#install
 #checkov:skip=CKV2_DOCKER_4: "Ensure that certificate validation isn't disabled with the pip '--trusted-host' option"
-RUN python3 -m pip install --no-cache-dir --quiet --upgrade --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org git+https://github.com/pre-commit/pre-commit.git@v3.6.0
+RUN python3 -m pip install --no-cache-dir --quiet --upgrade pre-commit==3.6.0
 
 WORKDIR /app
