@@ -1,23 +1,21 @@
 ---
-version: "3.4"
 services:
   terraform-modules-library:
     tty: true
+    image: ghcr.io/star3am/terraform-modules-library-container:latest
     # Build the container from the Dockerfile before we run it
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    # If you have build and pushed this container to a registry you can use it below and disable build above
-    # image: tools-${ARCH}:latest
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
     network_mode: "bridge"
     volumes:
       # Mounts the project folder into the container
       - ".:/app"
       # Mount your ~/.ssh folder into the container
       # for Authenticating to Github
-      - "~/.ssh:/home/ubuntu/.ssh"
+      # - "~/.ssh:/home/ubuntu/.ssh"
       # For GPG Auth to Github
-      - "~/.gnupg:/home/ubuntu/.gnupg"
+      # - "~/.gnupg:/home/ubuntu/.gnupg"
       # Add your .aws or .azure or .kube directories here
       # - "$AZURE_CONFIG_DIR:/home/ubuntu/.azure"
     working_dir: "/app"
