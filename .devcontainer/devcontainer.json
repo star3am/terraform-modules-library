@@ -10,8 +10,16 @@
     "create-terraform-plugin-cache-dir": "mkdir -p $HOME/.terraform.d/plugin-cache",
     "pre-commit-install": "pre-commit install"
   },
+  "postAttachCommand": {
+    "print-message-of-the-day": "bash /etc/update-motd.d/00-header"
+  },
   "customizations": {
     "vscode": {
+      "settings": {
+        "editor.fontSize": 16,
+        "terminal.integrated.fontSize": 16,
+        "terminal.integrated.scrollback": 1000
+      },
       "extensions": [
         "dbaeumer.vscode-eslint",
         "hashicorp.terraform",

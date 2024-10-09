@@ -1,0 +1,15 @@
+#!/bin/bash
+/usr/bin/toilet --gay -f standard *DevContainer* -w 170
+printf "%s"
+
+printf "\n"
+printf '\e[33;0;36m'"Welcome! You are running Terraform Modules Library in a Github Codespace. The information below will help you get started!\n"
+printf '\e[33;0;36m'"For more info see: https://github.com/star3am/terraform-modules-library\n"
+printf '\e[33;0;36m'"Happy Infra Coding!\n"
+printf "\n"
+printf '\e[33;1;93m'" * Documentation:  \e[38;5;198m https://github.com/star3am/terraform-modules-library/tree/main/docs\n"
+printf '\e[33;1;93m'" * Simulate Pipeline:       \e[38;5;198m bash run.sh\n"
+printf '\e[33;1;93m'" * Run Pre-Commit:          \e[38;5;198m pre-commit run -a\n"
+printf '\e[33;1;93m'" * Get All Make Commands    \e[38;5;198m make\n"
+printf '\e[33;1;93m'" * Terraform:               \e[38;5;198m terraform -h\n"
+printf "\n"

@@ -43,6 +43,9 @@ vim \
 less \
 dos2unix \
 rsync \
+update-motd \
+toilet \
+figlet \
 "
 
 # Env vars
@@ -144,6 +147,9 @@ RUN python3 -m pip install --no-cache-dir --quiet --upgrade azure-cli
 
 # checkov https://github.com/bridgecrewio/checkov
 RUN python3 -m pip install --no-cache-dir --quiet --upgrade checkov
+
+# motd
+COPY ./.devcontainer/etc/update-motd.d/00-header /etc/update-motd.d/00-header
 
 # cleanup
 RUN apt autoremove --purge -y && \
