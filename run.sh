@@ -8,6 +8,9 @@ pre-commit run -a
 echo "make clean"
 make clean
 
+echo "clear terraform plugin-cache"
+rm -rf /home/ubuntu/terraform.d
+
 echo "make init-all"
 make init-all
 
