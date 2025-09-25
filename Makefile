@@ -183,6 +183,7 @@ init-all: ## Run `terraform init` for specifc [DIRECTORY]
 		echo Running terraform init on $$module; \
 		cd $$module; \
 		terraform init -upgrade; \
+		sleep 1; \
 		cd ../../../../; \
 	done
 
